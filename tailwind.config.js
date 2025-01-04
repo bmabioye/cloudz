@@ -9,6 +9,8 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.js',
+        "./node_modules/aos/dist/aos.css",
+        "./node_modules/@fortawesome/fontawesome-free/**/*.css",
     ],
 
     theme: {
@@ -26,8 +28,10 @@ export default {
             transitionProperty: {
                 width: 'width',
             },
+            
         },
     },
 
     plugins: [forms],
 };
+

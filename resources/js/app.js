@@ -1,4 +1,18 @@
 import './bootstrap';
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+// Initialize AOS
+AOS.init({
+    duration: 1200, // Animation duration in ms
+    //offset: 200,    // Start animation after scrolling 200px
+    easing: "ease-in-out",
+    once: false,     // Animation only occurs once
+    disable: function () {
+      return window.innerWidth < 768; // Disable animations on small screens
+    },
+  });
+  
 
 // app.js or the Alpine.js script
 import Alpine from 'alpinejs';

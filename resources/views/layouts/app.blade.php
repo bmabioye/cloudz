@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data x-init="$store.theme.init()">
+<html lang="en" x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }"
+      x-init="$watch('darkMode', value => { 
+          localStorage.setItem('darkMode', value); 
+          document.documentElement.classList.toggle('dark', value);
+      }); 
+      if (darkMode) document.documentElement.classList.add('dark');">
+
 
 <head>
     <meta charset="utf-8">
@@ -12,6 +18,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=raleway:400,500,600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,7 +27,7 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-<header class="flex justify-between items-center py-4 px-6 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow">
+<!-- <header class="flex justify-between items-center py-4 px-6 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow">
     <h1 class="text-xl font-bold">CloudZone</h1>
 
     <div x-data="{ darkMode: $store.theme.darkMode }">
@@ -47,7 +55,7 @@
     </label>
     </div>
 
-</header>
+</header> -->
 
     <div class="min-h-screen">
         <!-- Navigation -->

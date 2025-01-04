@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+[data-aos] {
+    transition-property: opacity, transform;
+    transition-duration: 0.8s;
+    transition-timing-function: ease-in-out;
+  }
+  
