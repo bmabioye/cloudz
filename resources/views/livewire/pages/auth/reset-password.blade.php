@@ -70,6 +70,7 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
+<h2 class="text-center text-2xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">Set A New CloudZone Password</h2>
     <form wire:submit="resetPassword">
         <!-- Email Address -->
         <div>

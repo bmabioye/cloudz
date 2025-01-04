@@ -37,6 +37,9 @@ new #[Layout('layouts.guest')] class extends Component
 }; ?>
 
 <div>
+
+    <h2 class="text-center text-2xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">Reset Your CloudZone Password</h2>
+
     <div class="mb-4 text-sm text-gray-600">
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
@@ -45,6 +48,7 @@ new #[Layout('layouts.guest')] class extends Component
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form wire:submit="sendPasswordResetLink">
+    
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />

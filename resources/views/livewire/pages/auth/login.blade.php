@@ -30,6 +30,7 @@ new #[Layout('layouts.guest')] class extends Component
 
     <form wire:submit="login">
         <!-- Email Address -->
+        <h2 class="text-center text-2xl font-extrabold text-gray-900 dark:text-gray-100 mb-4">Login to CloudZone</h2>
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
