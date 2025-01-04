@@ -1,5 +1,6 @@
 <nav 
-    class="bg-gray-800 text-white dark:bg-gray-900 dark:text-gray-100 sticky top-0 z-50 shadow-md"
+     :class="darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-800 text-white'"
+    class="sticky top-0 z-50 shadow-md transition-colors duration-300"
     x-data="{ isOpen: false }"
 >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -72,7 +73,7 @@
                                 <span class="block w-10 h-6 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
                                 <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transform transition-transform" :class="{ 'translate-x-4': darkMode }"></span>
                             </div>
-                            <span class="ml-3">Switch Theme</span>
+                            <span class="ml-3">Theme</span>
                         </label>
                     </div>
                 </div>
