@@ -1,94 +1,117 @@
-<!-- <nav>
-
-    <a href="{{ route('home') }}">Home</a>
-    <a href="{{ route('dashboard') }}">Dashboard</a>
-    <a href="{{ route('profile') }}">Profile</a>
-    <a href="{{ route('services.cloud-solutions') }}">Cloud Solutions</a>
-    <a href="{{ route('services.cybersecurity') }}">Cybersecurity</a>
-    <a href="{{ route('services.grc') }}">GRC</a>
-    <a href="{{ route('services.subscription-plans') }}">Subscription Plans</a>
-    <a href="{{ route('dashboard') }}">Dashboard</a>
-
-</nav> -->
-<nav class="bg-white dark:bg-gray-800 shadow">
+<nav 
+    class="bg-gray-800 text-white dark:bg-gray-900 dark:text-gray-100 sticky top-0 z-50 shadow-md"
+    x-data="{ isOpen: false }"
+>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <!-- Logo -->
-            <a href="{{ route('home') }}" class="text-lg font-bold text-gray-700 dark:text-gray-300">
-                CloudZone
-            </a>
-
-            <!-- Navigation Links -->
-            <div class="flex items-center space-x-6">
-                <a href="{{ route('home') }}" class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">Home</a>
-
-                <!-- Services Dropdown -->
-                <div class="relative group">
-                    <button class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
-                        <span>Services</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 001.414 0L10 6.414l3.293 3.293a1 1 0 001.414-1.414l-4-4a1 1 0 00-1.414 0l-4 4a1 1 0 000 1.414z" clip-rule="evenodd" />
-                        </svg>
-                    </button>
-                    <div class="absolute hidden group-hover:block bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded shadow-lg mt-2">
-                        <a href="{{ route('services.cloud-solutions') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11m-6 0v10m0 0l-4-4m4 4l4-4m13 10h-4m4-8h-4m4 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v6m4 4l4-4m0 0l-4-4m4 4v6" />
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center">
+                <a href="/" class="text-xl font-bold">CloudZone</a>
+                <div class="hidden md:flex space-x-4 ml-10">
+                    <a href="/" class="hover:text-gray-300">Home</a>
+                    <div class="relative group">
+                        <button class="flex items-center hover:text-gray-300">
+                            Services
+                            <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
-                            Cloud Solutions
-                        </a>
-                        <a href="{{ route('services.cybersecurity') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 flex items-center">
-                            <svg class="h-5 w-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12h4l-2-2m0 0l2 2m-2-2v6m-4-2H9m4-2H9m0 0H5m4 2v6" />
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Cloud Solutions</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Cybersecurity</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="flex items-center hover:text-gray-300">
+                            FastCert Library
+                            <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
-                            Cybersecurity
-                        </a>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Library Overview</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Certification Resources</a>
+                        </div>
+                    </div>
+                    <div class="relative group">
+                        <button class="flex items-center hover:text-gray-300">
+                            Mentorship
+                            <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">One-on-One Coaching</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Group Mentorship</a>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Search -->
-                <div class="relative">
-                    <input type="text" placeholder="Search..." class="text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-900 rounded-full px-3 py-1">
+            </div>
+            <div class="flex items-center">
+                <div class="hidden md:block relative">
+                    <input type="text" placeholder="Search..." class="rounded-full px-4 py-1 text-gray-900 dark:text-gray-900">
+                </div>
+                <div class="hidden md:flex items-center space-x-4 ml-4">
+                    <div class="relative group">
+                        <button class="flex items-center hover:text-gray-300">
+                            Account
+                            <svg class="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
+                            <a href="/dashboard" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Dashboard</a>
+                            <a href="/profile" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Profile</a>
+                            <a href="/login" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Login</a>
+                        </div>
+                    </div>
+                    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Get a Quote</a>
+                    <div>
+                        <input id="theme-toggle" type="checkbox" class="sr-only" x-model="darkMode">
+                        <label for="theme-toggle" class="flex items-center cursor-pointer">
+                            <div class="relative">
+                                <span class="block w-10 h-6 bg-gray-300 dark:bg-gray-600 rounded-full"></span>
+                                <span class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transform transition-transform" :class="{ 'translate-x-4': darkMode }"></span>
+                            </div>
+                            <span class="ml-3">Switch Theme</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button @click="isOpen = !isOpen" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
                 </div>
             </div>
-            <!-- dark mode switch -->
-            <div x-data="{ darkMode: $store.theme.darkMode }">
-    <label for="theme-toggle" class="flex items-center cursor-pointer">
-        <div class="relative">
-            <input
-                id="theme-toggle"
-                type="checkbox"
-                class="sr-only"
-                :checked="$store.theme.darkMode"
-                x-on:click="$store.theme.toggle()"
-            >
-            <div 
-                class="block w-10 h-6 rounded-full transition duration-300"
-                :class="$store.theme.darkMode ? 'bg-gray-700' : 'bg-gray-400'"
-            ></div>
-            <div 
-                class="dot absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition transform duration-300"
-                :class="$store.theme.darkMode ? 'translate-x-4' : ''"
-            ></div>
         </div>
-        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-100">
-            Switch Theme
-        </span>
-    </label>
-    </div>
-            <!-- Account Dropdown -->
-            <div class="relative group">
-                <button class="flex items-center text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
-                    Account
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 001.414 0L10 6.414l3.293 3.293a1 1 0 001.414-1.414l-4-4a1 1 0 00-1.414 0l-4 4a1 1 0 000 1.414z" clip-rule="evenodd" />
-                    </svg>
-                </button>
-                <div class="absolute hidden group-hover:block bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded shadow-lg mt-2">
-                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Dashboard</a>
-                    <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Profile</a>
-                    <a href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600">Login</a>
+        <div x-show="isOpen" class="md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700">Services</a>
+                <div class="relative">
+                    <button class="block px-3 py-2 w-full text-left rounded-md text-base font-medium hover:bg-gray-700">FastCert Library</button>
+                    <div class="hidden">
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-700">Library Overview</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-700">Certification Resources</a>
+                    </div>
                 </div>
+                <div class="relative">
+                    <button class="block px-3 py-2 w-full text-left rounded-md text-base font-medium hover:bg-gray-700">Mentorship</button>
+                    <div class="hidden">
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-700">One-on-One Coaching</a>
+                        <a href="#" class="block px-3 py-2 hover:bg-gray-700">Group Mentorship</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <button class="block px-3 py-2 w-full text-left rounded-md text-base font-medium hover:bg-gray-700">Account</button>
+                    <div class="hidden">
+                        <a href="/dashboard" class="block px-3 py-2 hover:bg-gray-700">Dashboard</a>
+                        <a href="/profile" class="block px-3 py-2 hover:bg-gray-700">Profile</a>
+                        <a href="/login" class="block px-3 py-2 hover:bg-gray-700">Login</a>
+                    </div>
+                </div>
+                <a href="#" class="block bg-blue-500 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-600">Get a Quote</a>
             </div>
         </div>
     </div>
