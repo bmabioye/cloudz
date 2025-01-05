@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\MentorshipController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome');
@@ -18,6 +19,12 @@ Route::view('/profile', 'profile')
 
 // CloudZone Custom Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('/mentorship', [HomeController::class, 'mentorship'])->name('mentorship');
+
+
+
+Route::get('/mentorship', [MentorshipController::class, 'landing'])->name('mentorship.landing');
+
 
 Route::prefix('services')->group(function () {
     Route::get('/cloud-solutions', [ServiceController::class, 'cloudSolutions'])->name('services.cloud-solutions');
@@ -30,11 +37,7 @@ Route::prefix('services')->group(function () {
     Route::get('/subscription-plans', [ServiceController::class, 'subscriptions'])->name('services.subscription-plans');
 });
 
-Route::prefix('bookings')->group(function () {
-    Route::get('/', [BookingController::class, 'index']); // List mentorship services
-    Route::get('/availability/{serviceId}', [BookingController::class, 'showAvailability']); // Show slots
-    Route::post('/', [BookingController::class, 'store']); // Create booking
-    Route::put('/{bookingId}/status', [BookingController::class, 'updateStatus']); // Update booking status
-});
+
 // Include authentication routes from Breeze
 require __DIR__ . '/auth.php';
+

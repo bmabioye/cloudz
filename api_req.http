@@ -1,0 +1,13 @@
+# GET http://127.0.0.1:8000/api/bookings?type_id=1&topic_id=3&specialization=Cybersecurity
+# Accept: application/json
+
+
+POST http://127.0.0.1:8000/api/bookings
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "mentorship_service_id": 5,
+    "booking_date": "2025-01-10",
+    "booking_time": "14:00"
+}

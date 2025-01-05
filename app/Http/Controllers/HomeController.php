@@ -10,4 +10,9 @@ class HomeController extends Controller
     {
         return view('home'); // Make sure `home.blade.php` exists
     }
+
+    public function mentorship()
+    {
+        return view('mentorship'); // Make sure `home.blade.php` exists
+    }
 }

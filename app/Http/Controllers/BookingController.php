@@ -85,6 +85,7 @@ class BookingController extends Controller
             'status' => 'Pending',
         ]);
 
+        \Log::info($request->all());
         return response()->json(['message' => 'Booking created successfully', 'booking' => $booking]);
     }
 
