@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="bg-gray-100 dark:bg-gray-900 py-10">
     <!-- Hero Section -->
     <section class="text-center px-4 lg:px-8">
@@ -60,28 +61,55 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="mt-16">
-        <h2 class="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-10">
-            What Our Participants Say
-        </h2>
-        <div class="swiper-container px-4 lg:px-8">
-            <div class="swiper-wrapper">
-                @foreach($testimonials as $testimonial)
-                <div class="swiper-slide bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                    <p class="text-gray-600 dark:text-gray-300 italic">
-                        "{{ $testimonial->message }}"
+<section id="testimonials" class="mt-16">
+    <h2 class="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-10">
+        What Our Participants Say
+    </h2>
+    <div class="relative overflow-hidden max-w-4xl mx-auto">
+        <div
+            class="flex transition-transform duration-500 ease-in-out"
+            data-aos="fade-up"
+            id="testimonial-slides"
+        >
+            @foreach($testimonials as $testimonial)
+                <div class="min-w-full bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden bg-gray-300 dark:bg-gray-700">
+                        <img
+                            src="{{ $testimonial->avatar_url ?? '/default-avatar.png' }}"
+                            alt="{{ $testimonial->name }}"
+                            class="w-full h-full object-cover"
+                        />
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-center italic">
+                        "{{ $testimonial->content }}"
                     </p>
-                    <p class="mt-4 text-right text-gray-800 dark:text-gray-100">
+                    <p class="text-gray-800 dark:text-gray-100 text-lg font-medium">
                         - {{ $testimonial->name }}
                     </p>
                 </div>
-                @endforeach
-
-            </div>
-            <div class="swiper-pagination"></div>
+            @endforeach
         </div>
-    </section>
+        <!-- Navigation -->
+        <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
+            <button
+                id="prev-slide"
+                class="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 p-2 rounded-full"
+            >
+                &larr;
+            </button>
+        </div>
+        <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
+            <button
+                id="next-slide"
+                class="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 p-2 rounded-full"
+            >
+                &rarr;
+            </button>
+        </div>
+    </div>
+</section>
+
+
 
     <!-- Call to Action -->
     <section class="mt-16 text-center">

@@ -10,4 +10,14 @@
     transition-duration: 0.8s;
     transition-timing-function: ease-in-out;
   }
-  
+
+  #testimonial-slides {
+    display: flex;
+    overflow: hidden;
+}
+
+#testimonial-slides > div {
+    flex-shrink: 0;
+    width: 100%;
+    text-align: center;
+}

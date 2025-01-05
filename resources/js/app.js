@@ -58,3 +58,26 @@ document.addEventListener('alpine:init', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.getElementById('testimonial-slides');
+    const prevButton = document.getElementById('prev-slide');
+    const nextButton = document.getElementById('next-slide');
+    let currentIndex = 0;
+
+    const updateCarousel = () => {
+        const slideWidth = slides.children[0].offsetWidth;
+        slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    };
+
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) currentIndex--;
+        updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < slides.children.length - 1) currentIndex++;
+        updateCarousel();
+    });
+
+    window.addEventListener('resize', updateCarousel); // Adjust on window resize
+});
