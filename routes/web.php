@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BookingController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome');
@@ -29,5 +30,11 @@ Route::prefix('services')->group(function () {
     Route::get('/subscription-plans', [ServiceController::class, 'subscriptions'])->name('services.subscription-plans');
 });
 
+Route::prefix('bookings')->group(function () {
+    Route::get('/', [BookingController::class, 'index']); // List mentorship services
+    Route::get('/availability/{serviceId}', [BookingController::class, 'showAvailability']); // Show slots
+    Route::post('/', [BookingController::class, 'store']); // Create booking
+    Route::put('/{bookingId}/status', [BookingController::class, 'updateStatus']); // Update booking status
+});
 // Include authentication routes from Breeze
 require __DIR__ . '/auth.php';
