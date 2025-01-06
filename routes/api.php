@@ -23,3 +23,6 @@ Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']);
     Route::post('/', [BookingController::class, 'store']);
 });
+
+Route::get('/api/bookings/availability/{serviceId}/{date}', [BookingController::class, 'showAvailability']);
+Route::get('/api/bookings/slots', [BookingController::class, 'getSlots']);

@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', updateCarousel); // Adjust on window resize
 });
 
-
+// Booking calendar
 document.addEventListener('DOMContentLoaded', function () {
     const calendarEl = document.getElementById('booking-calendar');
     
@@ -135,58 +135,62 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// submit mentorship booking form
-// document.getElementById('bookingForm').addEventListener('submit', async function (e) {
+
+// Close modal
+document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('slotModal').classList.add('hidden');
+});
+
+
+
+// Booking form logic for submission 
+
+document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    try {
+        const response = await axios.post('/api/bookings', Object.fromEntries(formData));
+        alert('Booking successful!');
+        location.reload(); // Refresh calendar
+    } catch (error) {
+        console.error('Error submitting booking:', error);
+        alert('Booking failed: ' + error.response.data.message);
+    }
+});
+
+
+//Old fORM SUBMISSION LOGIC
+// document.getElementById('booking-form').addEventListener('submit', (e) => {
 //     e.preventDefault();
 
-//     const formData = new FormData(this);
-//     const response = await fetch('/api/bookings', {
+//     const formData = new FormData(e.target);
+//     const payload = {
+//         mentorship_service_id: formData.get('mentorship_service_id'),
+//         booking_date: document.getElementById('selected-date').textContent,
+//         booking_time: document.getElementById('selected-time').textContent,
+//         user_id: 1, // Replace with dynamic user ID
+//     };
+
+//     fetch('/api/bookings', {
 //         method: 'POST',
-//         body: formData,
 //         headers: {
-//             'Accept': 'application/json',
-//             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+//             'Content-Type': 'application/json',
 //         },
-//     });
-
-//     const result = await response.json();
-//     if (response.ok) {
-//         alert('Booking successful!');
-//         document.getElementById('slotModal').classList.add('hidden');
-//     } else {
-//         alert('Booking failed: ' + result.message);
-//     }
+//         body: JSON.stringify(payload),
+//     })
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.error) {
+//                 alert(data.error);
+//             } else {
+//                 alert('Booking successful!');
+//                 location.reload(); // Reload calendar
+//             }
+//         })
+//         .catch(error => console.error('Error:', error));
 // });
-
-document.getElementById('booking-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const payload = {
-        mentorship_service_id: formData.get('mentorship_service_id'),
-        booking_date: document.getElementById('selected-date').textContent,
-        booking_time: document.getElementById('selected-time').textContent,
-        user_id: 1, // Replace with dynamic user ID
-    };
-
-    fetch('/api/bookings', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-            } else {
-                alert('Booking successful!');
-                location.reload(); // Reload calendar
-            }
-        })
-        .catch(error => console.error('Error:', error));
-});
 
 
 

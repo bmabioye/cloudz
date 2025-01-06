@@ -22,9 +22,12 @@
                     <option value="Bootcamp">Bootcamp</option>
                 </select>
             </div>
-            <label for="mentorship-service" class="block text-sm font-bold mb-2">Service</label>
-            <select id="mentorship-service" name="mentorship_service_id" class="w-full mb-4 p-2 border rounded">
-                <!-- Dynamically populated options -->
+            <label for="mentorshipServicee" class="block text-sm font-bold mb-2">Service</label>
+            <select id="mentorship_service" name="mentorship_service_id" class="w-full mb-4 p-2 border rounded">
+                <option value="" disabled selected>Select a service</option>
+                @foreach($services as $service)
+                    <option value="{{ $service->id }}">{{ $service->type }}</option>
+                @endforeach
             </select>
 
             <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
@@ -143,9 +146,6 @@
         </div>
     </div>
 </section>
-
-
-
     <!-- Call to Action -->
     <section class="mt-16 text-center">
         <a href="#services" class="bg-blue-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-blue-600">
@@ -154,4 +154,5 @@
     </section>
 </div>
   <div id="booking-calendar" class="mt-6"></div>
+
 @endsection

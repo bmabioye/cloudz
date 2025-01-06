@@ -57,51 +57,87 @@ class BookingController extends Controller
     /**
      * Show available slots for a mentorship service.
      */
-    public function showAvailability($serviceId)
+    public function showAvailability($serviceId, $date)
     {
         $service = MentorshipService::findOrFail($serviceId);
-        $availability = $service->consultant->availability;
-
-        return response()->json([
-            'service' => $service,
-            'availability' => $availability, // Example format: ["2025-01-10 14:00:00", "2025-01-11 10:00:00"]
-        ]);
+        $availability = json_decode($service->consultant->availability, true);
+    
+        $slots = collect($availability)
+            ->where('date', $date)
+            ->pluck('slots')
+            ->flatten()
+            ->toArray();
+    
+        return response()->json(['slots' => $slots]);
     }
+    
 
-    /**
-     * Create a new booking.
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'slot_start' => 'required|date',
-            'slot_end' => 'required|date|after:slot_start',
-            'mentorship_type' => 'required|string',
-        ]);
+/**
+ * Create a new booking.
+ */
+public function store(Request $request)
+{
+    // Validate request data
+    $validated = $request->validate([
+        'slot_start' => 'required|date',
+        'slot_end' => 'required|date|after:slot_start',
+        'mentorship_service_id' => 'required|integer|exists:mentorship_services,id',
+        'user_id' => 'required|integer|exists:users,id',
+        'booking_date' => 'required|date',
+        'booking_time' => 'required|string',
+    ]);
 
-        // Check availability
-        $service = MentorshipService::findOrFail($request->mentorship_service_id);
-        $availability = $service->consultant->availability;
+    // Find the mentorship service and get the consultant's availability
+    $service = MentorshipService::findOrFail($validated['mentorship_service_id']);
+    $availability = json_decode($service->consultant->availability, true);
 
-        $selectedSlot = $request->booking_date . ' ' . $request->booking_time;
+    // Check if the selected slot is available
+    $selectedSlot = [
+        'date' => $validated['booking_date'],
+        'time' => $validated['booking_time']
+    ];
 
-        if (!in_array($selectedSlot, $availability)) {
-            return response()->json(['error' => 'Selected slot is not available'], 422);
+    $isSlotAvailable = false;
+
+    foreach ($availability as &$day) {
+        if ($day['date'] === $selectedSlot['date'] && in_array($selectedSlot['time'], $day['slots'])) {
+            $isSlotAvailable = true;
+
+            // Remove the booked slot from the availability
+            $day['slots'] = array_filter($day['slots'], function ($slot) use ($selectedSlot) {
+                return $slot !== $selectedSlot['time'];
+            });
+
+            break;
         }
-
-        // Create booking
-        $booking = Booking::create([
-            'user_id' => $validated['user_id'],
-            'mentorship_service_id' => $validated['mentorship_service_id'],
-            'booking_date' => $validated['booking_date'],
-            'booking_time' => $validated['booking_time'],
-            'status' => 'Pending',
-            'payment_status' => 'Unpaid',
-        ]);
-
-        \Log::info($request->all());
-        return response()->json(['message' => 'Booking created successfully', 'booking' => $booking]);
     }
+
+    if (!$isSlotAvailable) {
+        return response()->json(['error' => 'Selected slot is not available'], 422);
+    }
+
+    // Update the consultant's availability
+    $service->consultant->update(['availability' => json_encode($availability)]);
+
+    // Create the booking
+    $booking = Booking::create([
+        'user_id' => $validated['user_id'],
+        'mentorship_service_id' => $validated['mentorship_service_id'],
+        'booking_date' => $validated['booking_date'],
+        'booking_time' => $validated['booking_time'],
+        'status' => 'Pending',
+        'payment_status' => 'Unpaid',
+    ]);
+
+    // Log the request for debugging purposes
+    \Log::info('Booking request', $request->all());
+
+    return response()->json([
+        'message' => 'Booking created successfully',
+        'booking' => $booking,
+    ]);
+}
+
 
     /**
      * Update booking status.
@@ -124,4 +160,36 @@ class BookingController extends Controller
 
     return view('mentorship.book', compact('service'));
 }
+
+public function getSlots(Request $request)
+{
+    $start = $request->start;
+    $end = $request->end;
+
+    $consultants = Consultant::with('availability')->get();
+
+    $events = [];
+
+    foreach ($consultants as $consultant) {
+        $availability = json_decode($consultant->availability, true);
+
+        foreach ($availability as $slot) {
+            if ($slot['date'] >= $start && $slot['date'] <= $end) {
+                $events[] = [
+                    'title' => $consultant->name,
+                    'start' => $slot['start_time'],
+                    'end' => $slot['end_time'],
+                    'extendedProps' => [
+                        'consultant_id' => $consultant->id,
+                    ],
+                ];
+            }
+        }
+    }
+
+    return response()->json($events);
 }
+
+
+}
+
