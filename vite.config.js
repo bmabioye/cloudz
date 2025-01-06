@@ -8,4 +8,18 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '@': '/resources/js',
+        },
+    },
+    server: {
+        watch: {
+            usePolling: true,
+        },
+        cors: true,
+    },
+    optimizeDeps: {
+        include: ['@fullcalendar/core', '@fullcalendar/daygrid', '@fullcalendar/timegrid', '@fullcalendar/interaction'],
+    },
 });

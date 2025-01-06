@@ -2,6 +2,41 @@
 
 @section('content')
 
+<div id="slotModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Confirm Your Slot</h3>
+        <p id="selectedDate" class="text-gray-600"></p>
+        <p id="selectedTime" class="text-gray-600 mb-4"></p>
+
+        <form id="bookingForm" method="POST">
+            @csrf
+            <input type="hidden" name="slot_start" id="slotStart" />
+            <input type="hidden" name="slot_end" id="slotEnd" />
+            
+            <!-- Optional: Add dropdowns for service type, topic, etc. -->
+            <div class="mb-4">
+                <label for="mentorshipType" class="block text-sm font-medium text-gray-700">Mentorship Type</label>
+                <select name="mentorship_type" id="mentorshipType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    <option value="Webinar">Webinar</option>
+                    <option value="One-on-One">One-on-One</option>
+                    <option value="Bootcamp">Bootcamp</option>
+                </select>
+            </div>
+            <label for="mentorship-service" class="block text-sm font-bold mb-2">Service</label>
+            <select id="mentorship-service" name="mentorship_service_id" class="w-full mb-4 p-2 border rounded">
+                <!-- Dynamically populated options -->
+            </select>
+
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                Confirm Booking
+            </button>
+            <button type="button" onclick="document.getElementById('slotModal').classList.add('hidden')" class="text-gray-500 px-4 py-2 rounded-md hover:text-gray-700">
+                Cancel
+            </button>
+        </form>
+    </div>
+</div>
+
 <div class="bg-gray-100 dark:bg-gray-900 py-10">
     <!-- Hero Section -->
     <section class="text-center px-4 lg:px-8">
@@ -24,7 +59,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 lg:px-8">
             @foreach($services as $service)
             <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $service->name }}</h3>
+                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $service->type}}</h3>
                 <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $service->description }}</p>
                 <a href="{{ route('mentorship.book', $service->id) }}" class="mt-4 block bg-blue-500 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600">
                     Book a Session
@@ -118,4 +153,5 @@
         </a>
     </section>
 </div>
+  <div id="booking-calendar" class="mt-6"></div>
 @endsection

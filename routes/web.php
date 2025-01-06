@@ -24,7 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 Route::get('/mentorship', [MentorshipController::class, 'landing'])->name('mentorship.landing');
-
+Route::get('/mentorship/{id}/book', [BookingController::class, 'store'])->name('mentorship.book');
 
 Route::prefix('services')->group(function () {
     Route::get('/cloud-solutions', [ServiceController::class, 'cloudSolutions'])->name('services.cloud-solutions');

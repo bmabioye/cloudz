@@ -17,3 +17,9 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('/bookings/availability/{start}/{end}', [BookingController::class, 'fetchAvailableSlots']);
+
+Route::prefix('bookings')->group(function () {
+    Route::get('/', [BookingController::class, 'index']);
+    Route::post('/', [BookingController::class, 'store']);
+});

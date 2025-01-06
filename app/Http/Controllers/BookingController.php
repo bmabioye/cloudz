@@ -40,6 +40,20 @@ class BookingController extends Controller
         ]);
     }
 
+        public function fetchAvailableSlots($start, $end)
+        {
+            // Fetch slots for the specified date range
+            $slots = Consultant::with('bookings')
+                ->whereHas('availability', function ($query) use ($start, $end) {
+                    $query->whereBetween('date', [$start, $end]);
+                })
+                ->get();
+
+            return response()->json($slots);
+        }
+
+
+
     /**
      * Show available slots for a mentorship service.
      */
@@ -60,10 +74,9 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'mentorship_service_id' => 'required|exists:mentorship_services,id',
-            'booking_date' => 'required|date',
-            'booking_time' => 'required',
-            'user_id' => 'required|exists:users,id',
+            'slot_start' => 'required|date',
+            'slot_end' => 'required|date|after:slot_start',
+            'mentorship_type' => 'required|string',
         ]);
 
         // Check availability
@@ -78,11 +91,12 @@ class BookingController extends Controller
 
         // Create booking
         $booking = Booking::create([
-            'user_id' => $request->user_id,
-            'mentorship_service_id' => $request->mentorship_service_id,
-            'booking_date' => $request->booking_date,
-            'booking_time' => $request->booking_time,
+            'user_id' => $validated['user_id'],
+            'mentorship_service_id' => $validated['mentorship_service_id'],
+            'booking_date' => $validated['booking_date'],
+            'booking_time' => $validated['booking_time'],
             'status' => 'Pending',
+            'payment_status' => 'Unpaid',
         ]);
 
         \Log::info($request->all());
@@ -103,4 +117,11 @@ class BookingController extends Controller
 
         return response()->json(['message' => 'Booking status updated successfully', 'booking' => $booking]);
     }
+
+    public function create($id)
+{
+    $service = MentorshipService::findOrFail($id);
+
+    return view('mentorship.book', compact('service'));
+}
 }

@@ -4,14 +4,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* @import '@fullcalendar/core/main.css';
+@import '@fullcalendar/daygrid/main.css';
+@import '@fullcalendar/timegrid/main.css'; */
 
 [data-aos] {
     transition-property: opacity, transform;
     transition-duration: 0.8s;
     transition-timing-function: ease-in-out;
   }
-
-  #testimonial-slides {
+ #testimonial-slides {
     display: flex;
     overflow: hidden;
 }
@@ -20,4 +22,17 @@
     flex-shrink: 0;
     width: 100%;
     text-align: center;
+}
+
+#booking-calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#slotModal {
+  z-index: 1050; /* A high value to bring it above the calendar */
 }
