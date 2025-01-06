@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MentorshipType extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['type', 'description'];
 
-    public function mentorshipServices()
+    public function topics()
     {
-        return $this->hasMany(MentorshipService::class);
+        return $this->belongsToMany(Topic::class, 'mentorship_type_topic');
     }
 }
