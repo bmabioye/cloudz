@@ -22,6 +22,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/mentorship', [HomeController::class, 'mentorship'])->name('mentorship');
 
 
+Route::get('/mentorship/booking', [MentorshipController::class, 'showBookingForm'])->name('mentorship.booking');
+Route::post('/mentorship/booking', [MentorshipController::class, 'storeBooking'])->name('mentorship.booking.store');
+
 
 Route::get('/mentorship', [MentorshipController::class, 'landing'])->name('mentorship.landing');
 Route::get('/mentorship/{id}/book', [BookingController::class, 'book'])->name('mentorship.book');

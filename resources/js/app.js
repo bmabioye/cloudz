@@ -98,12 +98,16 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-        initialView: 'timeGridWeek',
+       initialView: 'timeGridWeek',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
+            // right: 'timeGridDay,timeGridWeek',
             right: 'dayGridMonth,timeGridWeek,timeGridDay',
         },
+        // initialView: timeGridDay,
+        // height: auto,
+
         events: async function (fetchInfo, successCallback, failureCallback) {
             try {
                 // Fetch available slots from API
@@ -134,8 +138,6 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar.render();
 });
 
-
-
 // Close modal
 document.getElementById('closeModal').addEventListener('click', function () {
     document.getElementById('slotModal').classList.add('hidden');
@@ -161,39 +163,6 @@ document.getElementById('bookingForm').addEventListener('submit', async function
 });
 
 
-//Old fORM SUBMISSION LOGIC
-// document.getElementById('booking-form').addEventListener('submit', (e) => {
-//     e.preventDefault();
-
-//     const formData = new FormData(e.target);
-//     const payload = {
-//         mentorship_service_id: formData.get('mentorship_service_id'),
-//         booking_date: document.getElementById('selected-date').textContent,
-//         booking_time: document.getElementById('selected-time').textContent,
-//         user_id: 1, // Replace with dynamic user ID
-//     };
-
-//     fetch('/api/bookings', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(payload),
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.error) {
-//                 alert(data.error);
-//             } else {
-//                 alert('Booking successful!');
-//                 location.reload(); // Reload calendar
-//             }
-//         })
-//         .catch(error => console.error('Error:', error));
-// });
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     // Fetch mentorship services
     fetch('/api/bookings')
@@ -208,3 +177,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 });
+
+

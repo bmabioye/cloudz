@@ -36,3 +36,73 @@
 #slotModal {
   z-index: 1050; /* A high value to bring it above the calendar */
 }
+
+
+/* Modal Styling */
+#mentorshipBookingModal .step-indicator {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ddd;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  font-weight: bold;
+  color: #555;
+}
+
+#mentorshipBookingModal .step-indicator.active {
+  border-color: #3490dc;
+  background-color: #3490dc;
+  color: #fff;
+}
+
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+
+.container {
+  max-width: 90%;
+}
+#booking-calendar {
+  height: 400px; /* Adjust based on screen size */
+}
+
+/* Booking Form styling */
+
+#bookingFormSection {
+  transition: all 0.5s ease-in-out;
+}
+
+/* .hidden {
+  display: none !important;
+} */
+
+.step-indicator {
+  width: 2rem;
+  height: 2rem;
+  line-height: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  color: #ccc;
+  background: #fff;
+}
+
+.step-indicator.active {
+  border-color: #007bff;
+  color: #007bff;
+  background: #eaf4ff;
+}
+
+/* Notification Hiddenm */
+#notification-section {
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+#notification-section.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
