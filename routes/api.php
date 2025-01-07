@@ -17,16 +17,18 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/bookings/availability/{start}/{end}', [BookingController::class, 'fetchAvailableSlots']);
+// Route::get('/bookings/availability/{start}/{end}', [BookingController::class, 'fetchAvailableSlots']);
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']);
     Route::post('/', [BookingController::class, 'store']);
+    Route::get('/availability', [BookingController::class, 'getAvailability']);
 });
 
-Route::get('/bookings/availability/{serviceId}/{date}', [BookingController::class, 'showAvailability']);
+
 Route::get('/bookings/slots', [BookingController::class, 'getSlots']);
 
+// Route::get('/availability/{date}', [BookingController::class, 'getAvailability']);
 
 // Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);
 // Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipType']);

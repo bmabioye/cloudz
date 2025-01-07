@@ -6,6 +6,7 @@ use App\Models\MentorshipService;
 use App\Models\Booking;
 use App\Models\Consultant;
 use App\Models\Topic;
+use App\Models\Availability;
 use App\Models\MentorshipType;
 use Illuminate\Http\Request;
 
@@ -60,7 +61,7 @@ class BookingController extends Controller
     public function showAvailability($serviceId, $date)
     {
         $service = MentorshipService::findOrFail($serviceId);
-        $availability = json_decode($service->consultant->availability, true);
+        $availability = json_decode($service->consultant->getAvailableSlots, true);
     
         $slots = collect($availability)
             ->where('date', $date)
@@ -79,61 +80,49 @@ public function store(Request $request)
 {
     // Validate request data
     $validated = $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'mentorship_service_id' => 'required|exists:mentorship_services,id',
+        'consultant_id' => 'required|exists:consultants,id',
         'slot_start' => 'required|date',
         'slot_end' => 'required|date|after:slot_start',
-        'mentorship_service_id' => 'required|integer|exists:mentorship_services,id',
-        'user_id' => 'required|integer|exists:users,id',
-        'booking_date' => 'required|date',
-        'booking_time' => 'required|string',
     ]);
 
-    // Find the mentorship service and get the consultant's availability
-    $service = MentorshipService::findOrFail($validated['mentorship_service_id']);
-    $availability = json_decode($service->consultant->availability, true);
 
-    // Check if the selected slot is available
-    $selectedSlot = [
-        'date' => $validated['booking_date'],
-        'time' => $validated['booking_time']
-    ];
 
-    $isSlotAvailable = false;
-
-    foreach ($availability as &$day) {
-        if ($day['date'] === $selectedSlot['date'] && in_array($selectedSlot['time'], $day['slots'])) {
-            $isSlotAvailable = true;
-
-            // Remove the booked slot from the availability
-            $day['slots'] = array_filter($day['slots'], function ($slot) use ($selectedSlot) {
-                return $slot !== $selectedSlot['time'];
-            });
-
-            break;
-        }
-    }
-
-    if (!$isSlotAvailable) {
-        return response()->json(['error' => 'Selected slot is not available'], 422);
-    }
 
     // Update the consultant's availability
-    $service->consultant->update(['availability' => json_encode($availability)]);
+
+    $availability = Availability::where('consultant_id', $validated['consultant_id'])
+    ->where('date', explode('T', $validated['slot_start'])[0])
+    ->where('start_time', explode('T', $validated['slot_start'])[1])
+    ->first();
+
+
+    if (!$availability || $availability->is_booked) {
+        return response()->json(['error' => 'Slot is no longer available'], 422);
+    }
+
+    $availability->is_booked = true;
+    $availability->save();
+
+
 
     // Create the booking
-    $booking = Booking::create([
-        'user_id' => $validated['user_id'],
-        'mentorship_service_id' => $validated['mentorship_service_id'],
-        'booking_date' => $validated['booking_date'],
-        'booking_time' => $validated['booking_time'],
-        'status' => 'Pending',
-        'payment_status' => 'Unpaid',
-    ]);
+        $booking = Booking::create([
+            'user_id' => $validated['user_id'],
+            'mentorship_service_id' => $validated['mentorship_service_id'],
+            'consultant_id' => $validated['consultant_id'],
+            'booking_date' => explode('T', $validated['slot_start'])[0],
+            'booking_time' => explode('T', $validated['slot_start'])[1],
+            'status' => 'Pending',
+            'payment_status' => 'Unpaid',
+        ]);
 
     // Log the request for debugging purposes
     \Log::info('Booking request', $request->all());
 
     return response()->json([
-        'message' => 'Booking created successfully',
+        'message' => 'Your Booking was successfully',
         'booking' => $booking,
     ]);
 }
@@ -188,6 +177,25 @@ public function getSlots(Request $request)
     }
 
     return response()->json($events);
+}
+
+public function getAvailability(Request $request)
+{
+    $startDate = $request->query('start');
+    $endDate = $request->query('end');
+
+    $availability = Availability::whereBetween('date', [$startDate, $endDate])
+        ->with('consultant')
+        ->get()
+        ->map(function ($slot) {
+            return [
+                'id' => $slot->id,
+                'date' => $slot->date,
+                'available' => $slot->isAvailable(), // Assuming this method calculates availability
+            ];
+        });
+
+    return response()->json($availability);
 }
 
 

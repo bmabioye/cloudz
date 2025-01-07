@@ -80,13 +80,6 @@
         </div> -->
     </div>
 </section>
-    <!-- Call to Action -->
-    <!-- <section class="mt-16 text-center">
-        <a href="#services" class="bg-blue-500 text-white py-3 px-6 rounded-full shadow-lg hover:bg-blue-600">
-            Get Started Today
-        </a>
-    </section> -->
-
 
 <div class="container mx-auto py-6">
     <!-- Request Button -->
@@ -131,39 +124,84 @@
 
         <div id="step-2" class="step hidden">
             <h3 class="text-xl font-bold mb-4">Select an Available Slot</h3>
-            <div id="booking-calendar" class="mb-4"></div>
+            <div id="calendar-navigation" class="calendar-navigation">
+            <!-- Slot Details Panel -->
+            <div id="slotDetailsPanel" class="slot-details hidden">
+                <h3>Selected Slots</h3>
+                <ul id="selectedSlotsList"></ul>
+            </div>
+            <button id="prev-month" class="nav-button">&laquo; Previous</button>
+            <span id="current-month"></span>
+            <button id="next-month" class="nav-button">Next &raquo;</button>
+            </div>
+            <div id="calendar" class="mb-4 calendar-container"></div>
+            <input type="hidden" id="selected-slot" name="selected-slot">
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
         <div id="step-3" class="step hidden">
             <h3 class="text-xl font-bold mb-4">Booking Summary</h3>
-            <div id="summary" class="bg-gray-100 p-4 rounded">
+            <div id="bookingSummary" class="bg-gray-100 p-4 rounded">
                 <!-- Summary dynamically populated -->
+                <p><strong>Service:</strong> <span id="summary-service"></span></p>
+                <p><strong>Type:</strong> <span id="summary-type"></span></p>
+                <p><strong>Date:</strong> <span id="summary-date"></span></p>
+                <p><strong>Time:</strong> <span id="summary-time"></span></p>
+                <p><strong>Price:</strong> <span id="summary-price"></span></p>
             </div>
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
-        <div id="step-4" class="step hidden">
-            <h3 class="text-xl font-bold mb-4">Enter Your Details</h3>
-            <label for="name" class="block text-sm font-bold mb-2">Name</label>
-            <input type="text" id="name" name="name" class="w-full mb-4 p-2 border rounded" placeholder="Your Name">
-
-            <label for="email" class="block text-sm font-bold mb-2">Email</label>
-            <input type="email" id="email" name="email" class="w-full mb-4 p-2 border rounded" placeholder="Your Email">
+          <div id="step-4" class="step hidden">
+            <h3 class="text-lg font-bold mb-4">Your Details</h3>
+            <p class="mb-4">Please provide your details to proceed with the booking.</p>
+            <div class="mb-4">
+                <label for="user-name" class="block font-bold mb-2">Full Name</label>
+                <input id="user-name" type="text" class="w-full border rounded px-2 py-2" placeholder="Enter your full name">
+            </div>
+            <div class="mb-4">
+                <label for="user-email" class="block font-bold mb-2">Email Address</label>
+                <input id="user-email" type="email" class="w-full border rounded px-2 py-2" placeholder="Enter your email address">
+            </div>
+            <div class="mb-4">
+                <label for="user-phone" class="block font-bold mb-2">Phone Number</label>
+                <input id="user-phone" type="tel" class="w-full border rounded px-2 py-2" placeholder="Enter your phone number">
+            </div>
 
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
         <div id="step-5" class="step hidden">
-            <h3 class="text-xl font-bold mb-4">Payment</h3>
-            <label for="payment-method" class="block text-sm font-bold mb-2">Payment Method</label>
-            <select id="payment-method" name="payment_method" class="w-full mb-4 p-2 border rounded">
-                <option value="credit_card">Credit Card</option>
+
+            <h3 class="text-lg font-bold mb-4">Payment</h3>
+            <p class="mb-4">Choose your payment method and provide payment details.</p>
+            <div class="mb-4">
+                <label for="payment-method" class="block font-bold mb-2">Payment Method</label>
+                <select id="payment-method" class="w-full border rounded px-2 py-2">
                 <option value="paypal">PayPal</option>
-            </select>
+                    <option value="credit_card">Credit Card</option>
+                </select>
+            </div>
+            <div id="credit-card-details" class="hidden mb-4">
+                <h4 class="font-bold mb-2">Credit Card Details</h4>
+                <div class="mb-2">
+                    <label for="card-number" class="block font-bold mb-2">Card Number</label>
+                    <input id="card-number" type="text" class="w-full border rounded px-2 py-2" placeholder="Enter your card number">
+                </div>
+                <div class="flex space-x-2">
+                    <div class="w-1/2">
+                        <label for="expiry-date" class="block font-bold mb-2">Expiry Date</label>
+                        <input id="expiry-date" type="text" class="w-full border rounded px-2 py-2" placeholder="MM/YY">
+                    </div>
+                    <div class="w-1/2">
+                        <label for="cvv" class="block font-bold mb-2">CVV</label>
+                        <input id="cvv" type="text" class="w-full border rounded px-2 py-2" placeholder="CVV">
+                    </div>
+                </div>
+            </div>
 
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="submitForm()" class="bg-blue-500 text-white px-6 py-2 rounded">Pay & Confirm</button>
@@ -171,12 +209,7 @@
     </div>
 </div>
 
-
-
-
 <script>
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
@@ -212,8 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-
-
     window.submitForm = function () {
     // Display the notification section
     notificationSection.classList.remove("hidden");
@@ -226,22 +257,24 @@ document.addEventListener("DOMContentLoaded", function () {
     showStep(0);
 
     // Clear input fields and selections
-    document.getElementById("mentorship-service").value = "";
-    document.getElementById("mentorship-type").value = "";
-    document.getElementById("name").value = "";
-    document.getElementById("email").value = "";
+    document.getElementById("serviceDropdown").value = "";
+    document.getElementById("typeDropdown").value = "";
+    document.getElementById("user-name").value = "";
+    document.getElementById("user-email").value = "";
     document.getElementById("payment-method").value = "";
-
+    document.getElementById("card-number").value = "";
+    document.getElementById("expiry-date").value = "";
+    document.getElementById("cvv").value = "";
     // Scroll back to the Request Mentorship button
     toggleFormButton.scrollIntoView({ behavior: "smooth" });
 };
 
 });
 
-const calendar = document.getElementById("booking-calendar").fullCalendar;
-if (calendar) {
-    calendar.unselect(); // Unselect any selected date/time
-}
+// const calendar = document.getElementById("booking-calendar").fullCalendar;
+// if (calendar) {
+//     calendar.unselect(); // Unselect any selected date/time
+// }
 
 setTimeout(() => {
     notificationSection.classList.add("hidden");
@@ -255,27 +288,20 @@ console.log("Form reset and ready for the next request!");
 
 // Add logic for populating the summary dynamically in nextStep()
 function populateSummary() {
-    document.getElementById("summary-service").innerText = document.getElementById("mentorship-service").value;
-    document.getElementById("summary-type").innerText = document.getElementById("mentorship-type").value;
+    document.getElementById("summary-service").innerText = document.getElementById("serviceDropdown").value;
+    document.getElementById("summary-type").innerText = document.getElementById("typeDropdown").value;
     document.getElementById("summary-slot").innerText = selectedSlot || "Not selected";
     document.getElementById("summary-name").innerText = document.getElementById("user-name").value;
     document.getElementById("summary-email").innerText = document.getElementById("user-email").value;
-    document.getElementById("summary-phone").innerText = document.getElementById("user-phone").value;
+    // document.getElementById("summary-phone").innerText = document.getElementById("user-phone").value;
 }
 
 // Trigger summary population on Step 4
-function nextStep() {
-    if (currentStep === 3) populateSummary();
-    if (currentStep < steps.length - 1) {
-        currentStep++;
-        showStep(currentStep);
-    }
-}
 
 const updateSummary = () => {
   const service = document.querySelector('select[name="service"]').value;
   const type = document.querySelector('select[name="type"]').value;
-  const slot = selectedSlot; // Assuming `selectedSlot` is populated when selecting a time
+  const slot = selectedSlot || "Not selected"; // Assuming `selectedSlot` is populated when selecting a time
 
   const summaryContainer = document.querySelector('#bookingSummary');
   summaryContainer.innerHTML = `
@@ -286,42 +312,6 @@ const updateSummary = () => {
 };
 
 // Call updateSummary() on moving to Step 3
-
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     // Populate the service dropdown
-//     fetch('/api/mentorship-services')
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 const serviceDropdown = document.getElementById('serviceDropdown');
-//                 data.data.forEach(service => {
-//                     const option = document.createElement('option');
-//                     option.value = service.id;
-//                     option.textContent = `${service.service_name} - $${service.price}`;
-//                     serviceDropdown.appendChild(option);
-//                 });
-//             }
-//         })
-//         .catch(error => console.error('Error fetching mentorship services:', error));
-
-//     // Populate the type dropdown
-//     fetch('/api/mentorship-types')
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 const typeDropdown = document.getElementById('typeDropdown');
-//                 data.data.forEach(type => {
-//                     const option = document.createElement('option');
-//                     option.value = type.id;
-//                     option.textContent = type.type;
-//                     typeDropdown.appendChild(option);
-//                 });
-//             }
-//         })
-//         .catch(error => console.error('Error fetching mentorship types:', error));
-// });
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -371,7 +361,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
         .catch(error => console.error('Error fetching mentorship types:', error));
+
+        document.getElementById("payment-method").addEventListener("change", (e) => {
+        const creditCardDetails = document.getElementById("credit-card-details");
+        if (e.target.value === "credit_card") {
+            creditCardDetails.style.display = "block";
+        } else {
+            creditCardDetails.style.display = "none";
+        }
+    });
 });
+
 
 
 </script>

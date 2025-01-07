@@ -4,9 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import '@fullcalendar/core/main.css';
-@import '@fullcalendar/daygrid/main.css';
-@import '@fullcalendar/timegrid/main.css'; */
 
 [data-aos] {
     transition-property: opacity, transform;
@@ -105,4 +102,134 @@
 #notification-section.hidden {
   opacity: 0;
   visibility: hidden;
+}
+
+
+/*Day.js Calendar customization */
+/* Calendar container */
+
+/* Calendar container - limit the width and enable scrolling */
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* 7 columns for 7 days */
+  gap: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 100%; /* Ensure it doesn’t overflow the screen */
+  overflow-x: auto; /* Allow horizontal scrolling if needed */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Individual day styling */
+/* .calendar-day {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer; 
+  transition: background-color 0.3s ease;
+} */
+
+.calendar-day:hover {
+  background-color: #e3f2fd; /* Light blue on hover */
+}
+
+.calendar-day .date {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.calendar-day .slot {
+  margin-top: 10px;
+  padding: 5px;
+  font-size: 0.9em;
+  background-color: #e0f7fa;
+  color: #00796b;
+  border-radius: 4px;
+}
+
+.calendar-day .no-slot {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .calendar-container {
+    grid-template-columns: repeat(3, 1fr); /* Show 3 columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar-container {
+    grid-template-columns: repeat(2, 1fr); /* Show 2 columns on very small screens */
+  }
+}
+
+
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.calendar-day.no-slot {
+  background-color: #f8d7da; /* Light red */
+  color: #721c24;
+  cursor: not-allowed;
+}
+
+.calendar-day.available-slot {
+  background-color: #d4edda; /* Light green */
+  color: #155724;
+}
+
+.calendar-day.available-slot:hover {
+  background-color: #c3e6cb;
+}
+
+.calendar-day span {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+/*Calendar Navigation*/
+.calendar-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #0056b3;
+}
+
+#current-month {
+  font-size: 1.2em;
+  font-weight: bold;
 }
