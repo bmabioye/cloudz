@@ -198,6 +198,24 @@ public function getAvailability(Request $request)
     return response()->json($availability);
 }
 
+public function getAvailabilityByDate(Request $request)
+{
+    $date = $request->query('date');
+    $availability = Availability::where('date', $date)
+        ->where('is_booked', false)
+        ->get()
+        ->map(function ($slot) {
+            return [
+                'id' => $slot->id,
+                'date' => $slot->date,
+                'available' => $slot->isAvailable(), // Assuming this method calculates availability
+            ];
+        });
+
+
+    return response()->json($availability);
+}
+
 
 }
 

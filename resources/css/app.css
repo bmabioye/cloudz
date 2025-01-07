@@ -239,7 +239,7 @@
   background-color: #d0ebff;
 }
 
-#selectedSlotsList {
+/* #selectedSlotsList {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -253,4 +253,38 @@
   border-radius: 5px;
   background-color: #e7f3ff;
   font-size: 14px;
+} */
+
+/* Tooltip Styling */
+.slot:hover::after {
+  content: attr(title);
+  position: absolute;
+  background: #000;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  z-index: 100;
+  white-space: nowrap;
+  transform: translate(-50%, -120%);
+  pointer-events: none;
 }
+
+/* Selected Slots Panel Styling */
+#slotDetailsPanel ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+#slotDetailsPanel ul li {
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
