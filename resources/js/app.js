@@ -60,171 +60,146 @@ document.addEventListener('alpine:init', () => {
 });
 
 // Testimonial 
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.getElementById('testimonial-slides');
-    const prevButton = document.getElementById('prev-slide');
-    const nextButton = document.getElementById('next-slide');
-    let currentIndex = 0;
+// document.addEventListener('DOMContentLoaded', () => {
+//     const slides = document.getElementById('testimonial-slides');
+//     const prevButton = document.getElementById('prev-slide');
+//     const nextButton = document.getElementById('next-slide');
+//     let currentIndex = 0;
 
-    const updateCarousel = () => {
-        const slideWidth = slides.children[0].offsetWidth;
-        slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    };
+//     const updateCarousel = () => {
+//         const slideWidth = slides.children[0].offsetWidth;
+//         slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+//     };
 
-    prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) currentIndex--;
-        updateCarousel();
-    });
+//     prevButton.addEventListener('click', () => {
+//         if (currentIndex > 0) currentIndex--;
+//         updateCarousel();
+//     });
 
-    nextButton.addEventListener('click', () => {
-        if (currentIndex < slides.children.length - 1) currentIndex++;
-        updateCarousel();
-    });
+//     nextButton.addEventListener('click', () => {
+//         if (currentIndex < slides.children.length - 1) currentIndex++;
+//         updateCarousel();
+//     });
 
-    window.addEventListener('resize', updateCarousel); // Adjust on window resize
-});
+//     window.addEventListener('resize', updateCarousel); // Adjust on window resize
+// });
 
 // Calendar
-// document.addEventListener('DOMContentLoaded', async () => {
-//     const calendarContainer = document.getElementById('calendar');
-//     const currentMonthLabel = document.getElementById('current-month');
-//     let currentMonth = dayjs().startOf('month'); // Start with the current month
-  
-//     const fetchAvailableSlots = async (startDate, endDate) => {
-//       try {
-//         const response = await fetch(`/api/bookings/availability?start=${startDate}&end=${endDate}`);
-//         if (!response.ok) throw new Error('Failed to fetch slots');
-//         const data = await response.json();
-//         return data.map(slot => ({
-//           id: slot.id,
-//           title: slot.title,
-//           date: dayjs(slot.start).format('YYYY-MM-DD'),
-//         }));
-//       } catch (error) {
-//         console.error('Error fetching slots:', error);
-//         return [];
-//       }
-//     };
-  
-//     const renderCalendar = async () => {
-//       const startDate = currentMonth.format('YYYY-MM-DD');
-//       const endDate = currentMonth.endOf('month').format('YYYY-MM-DD');
-//       const availableSlots = await fetchAvailableSlots(startDate, endDate);
-//       const daysInMonth = currentMonth.daysInMonth();
-  
-//       let calendarHTML = '';
-//       for (let i = 0; i < daysInMonth; i++) {
-//         const date = currentMonth.add(i, 'day');
-//         const formattedDate = date.format('YYYY-MM-DD');
-  
-//         const slot = availableSlots.find(s => s.date === formattedDate);
-  
-//         calendarHTML += `
-//           <div class="calendar-day" onclick="handleSlotClick('${slot ? slot.id : ''}')">
-//             <span class="date">${date.format('DD')}</span>
-//             ${
-//               slot
-//                 ? `<div class="slot">${slot.title}</div>`
-//                 : '<div class="no-slot">No Slot</div>'
-//             }
-//           </div>
-//         `;
-//       }
-  
-//       calendarContainer.innerHTML = calendarHTML;
-//       currentMonthLabel.textContent = currentMonth.format('MMMM YYYY'); // Update the label
-//     };
-  
-//     document.getElementById('prev-month').addEventListener('click', () => {
-//       currentMonth = currentMonth.subtract(1, 'month'); // Go to the previous month
-//       renderCalendar();
-//     });
-  
-//     document.getElementById('next-month').addEventListener('click', () => {
-//       currentMonth = currentMonth.add(1, 'month'); // Go to the next month
-//       renderCalendar();
-//     });
-  
-//     window.handleSlotClick = (slotId) => {
-//       if (slotId) {
-//         alert(`You selected slot ${slotId}`);
-//         document.getElementById('selected-slot').value = slotId;
-//       } else {
-//         alert('No slot available on this day');
-//       }
-//     };
-  
-//     await renderCalendar();
-//   });
-  
 
-  document.addEventListener('DOMContentLoaded', async () => {
+
+document.addEventListener('DOMContentLoaded', async () => {
     const calendarContainer = document.getElementById('calendar');
     const currentMonthLabel = document.getElementById('current-month');
+    const selectedSlots = [];
     let currentMonth = dayjs().startOf('month'); // Start with the current month
-  
+
+    // Function to fetch available slots
     const fetchAvailableSlots = async (startDate, endDate) => {
-      try {
-        const response = await fetch(`/api/bookings/availability?start=${startDate}&end=${endDate}`);
-        if (!response.ok) throw new Error('Failed to fetch slots');
-        const data = await response.json();
-        return data.map(slot => ({
-          id: slot.id,
-          date: dayjs(slot.date).format('YYYY-MM-DD'),
-          available: slot.available, // Boolean value from the backend
-        }));
-      } catch (error) {
-        console.error('Error fetching slots:', error);
-        return [];
-      }
+        try {
+            const response = await fetch(`/api/bookings/availability?start=${startDate}&end=${endDate}`);
+            if (!response.ok) throw new Error('Failed to fetch slots');
+            const data = await response.json();
+            return data.map(slot => ({
+                id: slot.id,
+                date: dayjs(slot.date).format('YYYY-MM-DD'),
+                startTime: slot.start_time,
+                endTime: slot.end_time,
+                available: slot.available,
+            }));
+        } catch (error) {
+            console.error('Error fetching slots:', error);
+            return [];
+        }
     };
-  
+
+    // Function to render the calendar
     const renderCalendar = async () => {
-      const startDate = currentMonth.format('YYYY-MM-DD');
-      const endDate = currentMonth.endOf('month').format('YYYY-MM-DD');
-      const availableSlots = await fetchAvailableSlots(startDate, endDate);
-      const daysInMonth = currentMonth.daysInMonth();
-  
-      let calendarHTML = '';
-      for (let i = 0; i < daysInMonth; i++) {
-        const date = currentMonth.add(i, 'day');
-        const formattedDate = date.format('YYYY-MM-DD');
-  
-        const slot = availableSlots.find(s => s.date === formattedDate);
-  
-        const slotClass = slot?.available ? 'available-slot' : 'no-slot';
-  
-        calendarHTML += `
-          <div class="calendar-day ${slotClass}" onclick="${slot?.available ? `handleSlotClick('${slot.id}')` : ''}">
-            <span class="date">${date.format('DD')}</span>
-            <div>${slot?.available ? 'Available' : 'No Slot'}</div>
-          </div>
-        `;
-      }
-  
-      calendarContainer.innerHTML = calendarHTML;
-      currentMonthLabel.textContent = currentMonth.format('MMMM YYYY'); // Update the label
+        const startDate = currentMonth.format('YYYY-MM-DD');
+        const endDate = currentMonth.endOf('month').format('YYYY-MM-DD');
+        const availableSlots = await fetchAvailableSlots(startDate, endDate);
+        const daysInMonth = currentMonth.daysInMonth();
+
+        let calendarHTML = '';
+        for (let i = 1; i <= daysInMonth; i++) {
+            const formattedDate = currentMonth.date(i).format('YYYY-MM-DD');
+            const slot = availableSlots.find(s => s.date === formattedDate);
+            const slotClass = slot?.available ? 'available-slot' : 'no-slot';
+
+            calendarHTML += `
+                <div 
+                    class="calendar-day ${slotClass}" 
+                    data-id="${slot?.id || ''}" 
+                    data-date="${slot?.date || ''}" 
+                    data-start-time="${slot?.startTime || ''}" 
+                    data-end-time="${slot?.endTime || ''}" 
+                    onclick="${slot?.available ? `handleSlotClick(this)` : ''}">
+                    <span class="date">${i}</span>
+                    <div>${slot?.available ? 'Available' : 'No Slot'}</div>
+                </div>
+            `;
+        }
+
+        calendarContainer.innerHTML = calendarHTML;
+        currentMonthLabel.textContent = currentMonth.format('MMMM YYYY');
     };
-  
+
+    // Handle slot click
+    window.handleSlotClick = (slotElement) => {
+        if (!slotElement) return;
+
+        const slotData = {
+            id: slotElement.dataset.id,
+            date: slotElement.dataset.date,
+            startTime: slotElement.dataset.startTime,
+            endTime: slotElement.dataset.endTime,
+        };
+
+        const index = selectedSlots.findIndex(slot => slot.id === slotData.id);
+        if (index > -1) {
+            // Deselect the slot
+            selectedSlots.splice(index, 1);
+            slotElement.classList.remove('selected');
+        } else {
+            // Select the slot
+            selectedSlots.push(slotData);
+            slotElement.classList.add('selected');
+        }
+
+        updateSlotDetailsPanel();
+    };
+
+    // Update slot details panel
+    const updateSlotDetailsPanel = () => {
+        const panel = document.getElementById('slotDetailsPanel');
+        const list = document.getElementById('selectedSlotsList');
+
+        list.innerHTML = ''; // Clear the list
+        if (selectedSlots.length > 0) {
+            panel.classList.remove('hidden');
+            selectedSlots.forEach(slot => {
+                const listItem = document.createElement('li');
+                const formattedStartTime = dayjs(slot.startTime, 'HH:mm:ss').format('hh:mm A');
+                const formattedEndTime = dayjs(slot.endTime, 'HH:mm:ss').format('hh:mm A');
+                listItem.textContent = `${slot.date} (${formattedStartTime} - ${formattedEndTime})`;
+                list.appendChild(listItem);
+            });
+            
+        } else {
+            panel.classList.add('hidden');
+        }
+    };
+
+    // Navigation buttons
     document.getElementById('prev-month').addEventListener('click', () => {
-      currentMonth = currentMonth.subtract(1, 'month'); // Go to the previous month
-      renderCalendar();
+        currentMonth = currentMonth.subtract(1, 'month');
+        renderCalendar();
     });
-  
+
     document.getElementById('next-month').addEventListener('click', () => {
-      currentMonth = currentMonth.add(1, 'month'); // Go to the next month
-      renderCalendar();
+        currentMonth = currentMonth.add(1, 'month');
+        renderCalendar();
     });
-  
-    window.handleSlotClick = (slotId) => {
-      if (slotId) {
-        alert(`You selected slot ${slotId}`);
-        document.getElementById('selected-slot').value = slotId;
-      } else {
-        alert('No slot available on this day');
-      }
-    };
-  
+
+    // Initial render
     await renderCalendar();
-  });
-  
+});

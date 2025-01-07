@@ -125,22 +125,24 @@
         <div id="step-2" class="step hidden">
             <h3 class="text-xl font-bold mb-4">Select an Available Slot</h3>
             <div id="calendar-navigation" class="calendar-navigation">
-            <!-- Slot Details Panel -->
+         
             <div id="slotDetailsPanel" class="slot-details hidden">
                 <h3>Selected Slots</h3>
                 <ul id="selectedSlotsList"></ul>
             </div>
+        </div>
+        <diV>
             <button id="prev-month" class="nav-button">&laquo; Previous</button>
             <span id="current-month"></span>
             <button id="next-month" class="nav-button">Next &raquo;</button>
-            </div>
+        </div>
             <div id="calendar" class="mb-4 calendar-container"></div>
             <input type="hidden" id="selected-slot" name="selected-slot">
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
-        <div id="step-3" class="step hidden">
+       <div id="step-3" class="step hidden">
             <h3 class="text-xl font-bold mb-4">Booking Summary</h3>
             <div id="bookingSummary" class="bg-gray-100 p-4 rounded">
                 <!-- Summary dynamically populated -->
@@ -371,7 +373,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
 
 
 </script>
