@@ -54,14 +54,14 @@
         What Our Participants Say
     </h2>
     <div class="relative overflow-hidden max-w-4xl mx-auto">
-        <div
+        <!-- <div
             class="flex transition-transform duration-500 ease-in-out"
             data-aos="fade-up"
             id="testimonial-slides"
         > Testimonial goes here
  
         </div>
-        <!-- Navigation -->
+    
         <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
             <button
                 id="prev-slide"
@@ -77,7 +77,7 @@
             >
                 &rarr;
             </button>
-        </div>
+        </div> -->
     </div>
 </section>
     <!-- Call to Action -->
@@ -116,13 +116,13 @@
         <!-- Steps -->
         <div id="step-1" class="step">
             <h3 class="text-xl font-bold mb-4">Select a Mentorship Service</h3>
-            <label for="mentorship-service" class="block text-sm font-bold mb-2">Service</label>
-            <select id="mentorship-service" name="mentorship_service_id" class="w-full mb-4 p-2 border rounded">
+            <label for="serviceDropdown" class="block text-sm font-bold mb-2">Service</label>
+            <select id="serviceDropdown" name="service" class="w-full mb-4 p-2 border rounded">
                 <!-- Dynamically populated options -->
             </select>
 
-            <label for="mentorship-type" class="block text-sm font-bold mb-2">Type</label>
-            <select id="mentorship-type" name="mentorship_type_id" class="w-full mb-4 p-2 border rounded">
+            <label for="typeDropdown" class="block text-sm font-bold mb-2">Type</label>
+            <select id="typeDropdown" name="type" class="w-full mb-4 p-2 border rounded">
                 <!-- Dynamically populated options -->
             </select>
 
@@ -272,38 +272,107 @@ function nextStep() {
     }
 }
 
+const updateSummary = () => {
+  const service = document.querySelector('select[name="service"]').value;
+  const type = document.querySelector('select[name="type"]').value;
+  const slot = selectedSlot; // Assuming `selectedSlot` is populated when selecting a time
 
-// populate service dynamically
+  const summaryContainer = document.querySelector('#bookingSummary');
+  summaryContainer.innerHTML = `
+    <p><strong>Service:</strong> ${service}</p>
+    <p><strong>Type:</strong> ${type}</p>
+    <p><strong>Slot:</strong> ${slot}</p>
+  `;
+};
 
-async function populateDropdowns() {
-    try {
-        const [services, types] = await Promise.all([
-            axios.get("/api/mentorship/services"), // Replace with your route
-            axios.get("/api/mentorship/types"), // Replace with your route
-        ]);
+// Call updateSummary() on moving to Step 3
 
-        const serviceDropdown = document.getElementById("mentorship-service");
-        const typeDropdown = document.getElementById("mentorship-type");
 
-        services.data.forEach(service => {
-            const option = document.createElement("option");
-            option.value = service.id;
-            option.textContent = service.service_name;
-            serviceDropdown.appendChild(option);
-        });
 
-        types.data.forEach(type => {
-            const option = document.createElement("option");
-            option.value = type.id;
-            option.textContent = type.type;
-            typeDropdown.appendChild(option);
-        });
-    } catch (error) {
-        console.error("Error fetching data for dropdowns:", error);
-    }
-}
+// document.addEventListener('DOMContentLoaded', function () {
+//     // Populate the service dropdown
+//     fetch('/api/mentorship-services')
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 const serviceDropdown = document.getElementById('serviceDropdown');
+//                 data.data.forEach(service => {
+//                     const option = document.createElement('option');
+//                     option.value = service.id;
+//                     option.textContent = `${service.service_name} - $${service.price}`;
+//                     serviceDropdown.appendChild(option);
+//                 });
+//             }
+//         })
+//         .catch(error => console.error('Error fetching mentorship services:', error));
 
-document.addEventListener("DOMContentLoaded", populateDropdowns);
+//     // Populate the type dropdown
+//     fetch('/api/mentorship-types')
+//         .then(response => response.json())
+//         .then(data => {
+//             if (data.success) {
+//                 const typeDropdown = document.getElementById('typeDropdown');
+//                 data.data.forEach(type => {
+//                     const option = document.createElement('option');
+//                     option.value = type.id;
+//                     option.textContent = type.type;
+//                     typeDropdown.appendChild(option);
+//                 });
+//             }
+//         })
+//         .catch(error => console.error('Error fetching mentorship types:', error));
+// });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const serviceDropdown = document.getElementById('serviceDropdown');
+    const typeDropdown = document.getElementById('typeDropdown');
+
+    // Fetch mentorship services
+    fetch('/api/mentorship-services')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                data.data.forEach(service => {
+                    const option = document.createElement('option');
+                    option.value = service.id;
+                    option.textContent = `${service.service_name} - $${service.price}`;
+                    serviceDropdown.appendChild(option);
+                });
+            } else {
+                console.error('Error: ', data);
+            }
+        })
+        .catch(error => console.error('Error fetching mentorship services:', error));
+
+    // Fetch mentorship types
+    fetch('/api/mentorship-types')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                data.data.forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type.id;
+                    option.textContent = type.type;
+                    typeDropdown.appendChild(option);
+                });
+            } else {
+                console.error('Error: ', data);
+            }
+        })
+        .catch(error => console.error('Error fetching mentorship types:', error));
+});
+
 
 </script>
 @endsection

@@ -6,7 +6,12 @@
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
         <!-- Company Info -->
         <div>
-            <h3 class="text-lg font-semibold mb-4">CloudZone</h3>
+            <!-- <h3 class="text-lg font-semibold mb-4">CloudZone</h3> -->
+      
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('images/cloudzone-blue.png') }}" alt="logo" style="height: 40px;">
+                </a><br/>
+         
             <p>
                 Empowering businesses with tailored IT solutions and mentorship. 
                 Your journey, our mission.

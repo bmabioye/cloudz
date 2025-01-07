@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-       initialView: 'timeGridWeek',
+       initialView: 'dayGridMonth',
         headerToolbar: {
             left: 'prev,next today',
             center: 'title',
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectable: true,
         select: function (info) {
             // Handle slot selection
-            // alert(`Selected: ${info.startStr} to ${info.endStr}`);
+            alert(`Selected: ${info.startStr} to ${info.endStr}`);
 
              // Open the modal and pass selected slot details
             document.getElementById('slotModal').classList.remove('hidden');
@@ -138,29 +138,8 @@ document.addEventListener('DOMContentLoaded', function () {
     calendar.render();
 });
 
-// Close modal
-document.getElementById('closeModal').addEventListener('click', function () {
-    document.getElementById('slotModal').classList.add('hidden');
-});
-
-
 
 // Booking form logic for submission 
-
-document.getElementById('bookingForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    try {
-        const response = await axios.post('/api/bookings', Object.fromEntries(formData));
-        alert('Booking successful!');
-        location.reload(); // Refresh calendar
-    } catch (error) {
-        console.error('Error submitting booking:', error);
-        alert('Booking failed: ' + error.response.data.message);
-    }
-});
 
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -6,7 +6,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
             <div class="flex items-center">
-                <a href="/" class="text-xl font-bold">CloudZone</a>
+                <!-- <a href="/" class="text-xl font-bold">CloudZone</a> -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="{{ asset('images/cloudzone-white.png') }}" alt="logo" style="height: 40px;">
+                </a>
+
                 <div class="hidden md:flex space-x-4 ml-10">
                     <a href="/" class="hover:text-gray-300">Home</a>
                     <div class="relative group">

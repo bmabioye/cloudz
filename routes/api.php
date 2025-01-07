@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
-
+use App\Http\Controllers\MentorshipController;
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services
@@ -24,5 +24,14 @@ Route::prefix('bookings')->group(function () {
     Route::post('/', [BookingController::class, 'store']);
 });
 
-Route::get('/api/bookings/availability/{serviceId}/{date}', [BookingController::class, 'showAvailability']);
-Route::get('/api/bookings/slots', [BookingController::class, 'getSlots']);
+Route::get('/bookings/availability/{serviceId}/{date}', [BookingController::class, 'showAvailability']);
+Route::get('/bookings/slots', [BookingController::class, 'getSlots']);
+
+
+// Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);
+// Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipType']);
+
+Route::middleware([])->group(function () {
+    Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);
+    Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipTypes']);
+});
