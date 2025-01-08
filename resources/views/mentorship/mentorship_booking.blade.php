@@ -55,30 +55,6 @@
         What Our Participants Say
     </h2>
     <div class="relative overflow-hidden max-w-4xl mx-auto">
-        <!-- <div
-            class="flex transition-transform duration-500 ease-in-out"
-            data-aos="fade-up"
-            id="testimonial-slides"
-        > Testimonial goes here
- 
-        </div>
-    
-        <div class="absolute top-1/2 transform -translate-y-1/2 left-4">
-            <button
-                id="prev-slide"
-                class="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 p-2 rounded-full"
-            >
-                &larr;
-            </button>
-        </div>
-        <div class="absolute top-1/2 transform -translate-y-1/2 right-4">
-            <button
-                id="next-slide"
-                class="bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-100 p-2 rounded-full"
-            >
-                &rarr;
-            </button>
-        </div> -->
     </div>
 </section>
 
@@ -152,9 +128,7 @@
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
-     
-
-          <div id="step-3" class="step hidden">
+            <div id="step-3" class="step hidden">
             <h3 class="text-lg font-bold mb-4">Your Details</h3>
             <p class="mb-4">Please provide your details to proceed with the booking.</p>
             <div class="mb-4">
@@ -186,7 +160,7 @@
 
         <div id="step-5" class="step hidden">
 
-            <h3 class="text-lg font-bold mb-4">Payment</h3>
+            <!-- <h3 class="text-lg font-bold mb-4">Payment</h3>
             <p class="mb-4">Choose your payment method and provide payment details.</p>
             <div class="mb-4">
                 <label for="payment-method" class="block font-bold mb-2">Payment Method</label>
@@ -211,18 +185,18 @@
                         <input id="cvv" type="text" class="w-full border rounded px-2 py-2" placeholder="CVV">
                     </div>
                 </div>
-            </div>
-
+            </div> -->
+            <h3>Confirm Your Booking</h3>
+            <div id="bookingSummary"></div>
+            <h3>Payment link will be sent via email after the booking slot has been confirmed</h3>
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
-            <button onclick="submitForm()" class="bg-blue-500 text-white px-6 py-2 rounded">Pay & Confirm</button>
+            <button onclick="submitForm()" id="confirmBookingButton" class="bg-blue-500 text-white px-6 py-2 rounded">Confirm Booking</button>
         </div>
     </div>
 </div>
 
+
 <script>
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
     const steps = document.querySelectorAll(".step");
@@ -230,6 +204,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const formSection = document.getElementById("bookingFormSection");
     const notificationSection = document.getElementById("notificationSection");
     const toggleFormButton = document.getElementById("toggleFormButton");
+
+    // Booking confirmation button
+    const confirmBookingButton = document.getElementById("confirmBookingButton");
 
     let selectedSlots = []; // To store selected slots
 
@@ -297,21 +274,21 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Function to dynamically update the booking summary
-   
     const updateSummary = () => {
         const service = document.querySelector("#serviceDropdown").options[document.querySelector("#serviceDropdown").selectedIndex].text || "Not selected";
         const type =  document.querySelector("#typeDropdown").options[document.querySelector("#typeDropdown").selectedIndex].text  || "Not selected";
         const topic =  document.querySelector("#topicDropdown").options[document.querySelector("#topicDropdown").selectedIndex].text || "Not selected";
         const price = document.querySelector("#priceInput")?.value || "Not provided";
 
-        const summaryContainer = document.getElementById("bookingSummary");
         const slotsSummary = selectedSlots
             .map(
                 (slot) => `<li>${slot.date} (${slot.startTime} - ${slot.endTime})</li>`
             )
             .join("");
 
-        
+        console.log("Selected Slots:", slotsSummary);
+
+        const summaryContainer = document.getElementById("bookingSummary");
             summaryContainer.innerHTML = `
             <p><strong>Service:</strong> ${service}</p>
             <p><strong>Type:</strong> ${type}</p>
@@ -321,6 +298,37 @@ document.addEventListener("DOMContentLoaded", function () {
             <ul>${slotsSummary || "<li>No slots selected</li>"}</ul>
         `;
     };
+
+
+    confirmBookingButton.addEventListener("click", async function () {
+        const bookingDetails = {
+            service: document.querySelector('select[name="service"]').value,
+            type: document.querySelector('select[name="type"]').value,
+            topic: document.querySelector('select[name="topic"]').value,
+            slots: selectedSlots,
+        };
+
+        try {
+            const response = await fetch("/api/bookings/confirm", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bookingDetails),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Booking confirmed! Booking ID: " + result.bookingId);
+                // Optionally redirect to confirmation or dashboard page
+            } else {
+                alert("Error confirming booking: " + result.message);
+            }
+        } catch (error) {
+            console.error("Error confirming booking:", error);
+            alert("Booking Confirmation error. Please try again");
+        }
+    });
 
     // Example function to handle slot selection (integrate into slot click logic)
     window.addSlotToSelection = function (slotData) {

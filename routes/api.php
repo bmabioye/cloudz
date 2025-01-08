@@ -26,12 +26,11 @@ Route::prefix('bookings')->group(function () {
 });
 
 
+Route::post('/bookings/confirm', [BookingController::class, 'confirmBooking']);
 Route::get('/bookings/slots', [BookingController::class, 'getSlots']);
-
-// Route::get('/availability/{date}', [BookingController::class, 'getAvailability']);
-
-// Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);
-// Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipType']);
+Route::put('/bookings/{id}/status', [BookingController::class, 'updateStatus']);
+Route::post('/bookings/{id}/cancel', [BookingController::class, 'cancelBooking']);
+Route::post('/bookings/{id}/reschedule', [BookingController::class, 'rescheduleBooking']);
 
 Route::middleware([])->group(function () {
     Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);

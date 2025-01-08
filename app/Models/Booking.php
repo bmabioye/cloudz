@@ -7,7 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = ['user_id', 'mentorship_service_id', 'booking_date', 'booking_time', 'status', 'payment_status'];
-
+    const STATUSES = [
+        'pending' => 'Pending',
+        'confirmed' => 'Confirmed',
+        'cancelled' => 'Cancelled',
+        'rescheduled' => 'Rescheduled',
+        'suspended' => 'Suspended',
+    ];
+    
     public function mentorshipService()
     {
         return $this->belongsTo(MentorshipService::class);

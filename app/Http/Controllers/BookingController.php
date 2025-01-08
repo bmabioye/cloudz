@@ -125,31 +125,17 @@ public function store(Request $request)
         'message' => 'Your Booking was successfully',
         'booking' => $booking,
     ]);
-}
-
-
-    /**
-     * Update booking status.
-     */
-    public function updateStatus(Request $request, $bookingId)
-    {
-        $request->validate([
-            'status' => 'required|in:Pending,Confirmed,Cancelled',
-        ]);
-
-        $booking = Booking::findOrFail($bookingId);
-        $booking->update(['status' => $request->status]);
-
-        return response()->json(['message' => 'Booking status updated successfully', 'booking' => $booking]);
     }
 
+// Create Booking
     public function create($id)
-{
-    $service = MentorshipService::findOrFail($id);
+    {
+        $service = MentorshipService::findOrFail($id);
 
-    return view('mentorship.book', compact('service'));
-}
+        return view('mentorship.book', compact('service'));
+    }
 
+    
 public function getSlots(Request $request)
 {
     $start = $request->start;
@@ -198,24 +184,93 @@ public function getAvailability(Request $request)
     return response()->json($availability);
 }
 
-public function getAvailabilityByDate(Request $request)
-{
-    $date = $request->query('date');
-    $availability = Availability::where('date', $date)
-        ->where('is_booked', false)
-        ->get()
-        ->map(function ($slot) {
-            return [
-                'id' => $slot->id,
-                'date' => $slot->date,
-                'available' => $slot->isAvailable(), // Assuming this method calculates availability
-            ];
-        });
+// public function getAvailabilityByDate(Request $request)
+// {
+//     $date = $request->query('date');
+//     $availability = Availability::where('date', $date)
+//         ->where('is_booked', false)
+//         ->get()
+//         ->map(function ($slot) {
+//             return [
+//                 'id' => $slot->id,
+//                 'date' => $slot->date,
+//                 'available' => $slot->isAvailable(), // Assuming this method calculates availability
+//             ];
+//         });
 
 
-    return response()->json($availability);
+//     return response()->json($availability);
+// }
+
+public function confirmBooking(Request $request)
+    {
+        $validated = $request->validate([
+            'slots' => 'required|array',
+            'user_name' => 'required|string',
+            'user_email' => 'required|email',
+            'payment_method' => 'required|string',
+        ]);
+
+        // Create bookings for the selected slots
+        foreach ($validated['slots'] as $slot) {
+            Booking::create([
+                'availability_id' => $slot['id'],
+                'mentorship_service_id' => $service['id'],
+                'user_name' => $validated['user_name'],
+                'user_email' => $validated['user_email'],
+                'payment_method' => $validated['payment_method'],
+                'status' => 'pending',
+            ]);
+
+            // Mark availability as booked
+            Availability::where('id', $slot['id'])->update(['is_booked' => true]);
+        }
+
+        return response()->json(['message' => 'Booking confirmed, pending payment.'], 201);
+    }
+
+
+
+    /**
+     * Update booking status.
+     */
+    public function updateStatus(Request $request, $bookingId)
+    {
+        $request->validate([
+            'status' => 'required|in:Pending,Confirmed,Cancelled',
+        ]);
+
+        $booking = Booking::findOrFail($bookingId);
+        $booking->update(['status' => $request->status]);
+
+        return response()->json(['message' => 'Booking status updated successfully', 'booking' => $booking]);
+    }
+
+    // Cancel Booking
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'cancelled';
+        $booking->save();
+
+        return response()->json(['message' => 'Booking cancelled.']);
+    }
+
+    // Reschedule Booking
+    public function rescheduleBooking(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'new_date' => 'required|date',
+        ]);
+
+        $booking = Booking::findOrFail($id);
+        $booking->status = 'rescheduled';
+        $booking->rescheduled_date = $validated['new_date']; // Add a new field for rescheduled_date
+        $booking->save();
+
+        return response()->json(['message' => 'Booking rescheduled.', 'new_date' => $validated['new_date']]);
+    }
+
 }
 
-
-}
 
