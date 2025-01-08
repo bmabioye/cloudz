@@ -36,4 +36,5 @@ Route::get('/bookings/slots', [BookingController::class, 'getSlots']);
 Route::middleware([])->group(function () {
     Route::get('/mentorship-services', [MentorshipController::class, 'getMentorshipServices']);
     Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipTypes']);
+    Route::get('/mentorship-topics', [MentorshipController::class, 'getMentorshipTopics']); 
 });

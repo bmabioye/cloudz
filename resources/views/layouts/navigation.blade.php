@@ -52,9 +52,25 @@
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="hidden md:block relative">
-                    <input type="text" placeholder="Search..." class="rounded-full px-4 py-1 text-gray-900 dark:text-gray-900">
+            <div class="relative">
+                <!-- FontAwesome Search Icon -->
+                <button id="searchIcon" class="dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-400">
+                <i class="fas fa-search text-xl"></i>
+                </button>
+
+                <!-- Hidden Search Bar -->
+                <div
+                    id="searchBar"
+                    class="absolute top-10 right-0 hidden bg-white dark:bg-gray-800 p-2 rounded-lg shadow-lg w-64"
+                >
+                    <input
+                        type="text"
+                        placeholder="Search..."
+                        class="w-full rounded-full px-4 py-2 text-gray-900 dark:text-gray-300 focus:outline-none focus:ring focus:ring-gray-300 dark:focus:ring-gray-600"
+                    >
+                     </div>
                 </div>
+
                 <div class="hidden md:flex items-center space-x-4 ml-4">
                     <div class="relative group">
                         <button class="flex items-center hover:text-gray-300">

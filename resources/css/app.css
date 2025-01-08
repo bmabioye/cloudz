@@ -36,7 +36,7 @@
 
 
 /* Modal Styling */
-#mentorshipBookingModal .step-indicator {
+/* #mentorshipBookingModal .step-indicator {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -52,7 +52,7 @@
   border-color: #3490dc;
   background-color: #3490dc;
   color: #fff;
-}
+} */
 
 /* Hidden class */
 .hidden {
@@ -77,7 +77,7 @@
   display: none !important;
 } */
 
-.step-indicator {
+/* .step-indicator {
   width: 2rem;
   height: 2rem;
   line-height: 2rem;
@@ -93,7 +93,76 @@
   border-color: #007bff;
   color: #007bff;
   background: #eaf4ff;
+} */
+
+.step-indicator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
+
+.step-indicator {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border: 2px solid #ccc;
+  border-radius: 25px; /* Rounded pill shape */
+  text-align: center;
+  font-weight: bold;
+  color: #ccc;
+  background: #fff;
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.step-indicator.active {
+  border-color: #007bff;
+  color: #fff;
+  background: #007bff;
+}
+
+.step-indicator:hover {
+  border-color: #0056b3;
+  color: #0056b3;
+  cursor: pointer;
+}
+
+.step-indicator:before,
+.step-indicator:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 2rem;
+  height: 2px;
+  background: #ccc;
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.step-indicator:before {
+  left: -2.5rem;
+}
+
+.step-indicator:after {
+  right: -2.5rem;
+}
+
+.step-indicator:first-child:before {
+  content: none;
+}
+
+.step-indicator:last-child:after {
+  content: none;
+}
+
+.step-indicator.active:before,
+.step-indicator.active:after {
+  background: #007bff;
+}
+
+
 
 /* Notification Hiddenm */
 #notification-section {

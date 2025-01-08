@@ -12,4 +12,4 @@
 #     "booking_time": "14:00"
 # }
 
-http://127.0.0.1:8000/api/mentorship-services
+http://127.0.0.1:8000/api/mentorship-topics

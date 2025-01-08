@@ -153,6 +153,5 @@
         </a>
     </section>
 </div>
-  <div id="booking-calendar" class="mt-6"></div>
 
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MentorshipService;
 use App\Models\MentorshipType;
+use App\Models\Topic;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
@@ -76,6 +77,23 @@ class MentorshipController extends Controller
     {
         try {
             $types = MentorshipType::all();
+    
+            return response()->json([
+                'success' => true,
+                'data' => $types,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function getMentorshipTopics()
+    {
+        try {
+            $types = Topic::all();
     
             return response()->json([
                 'success' => true,

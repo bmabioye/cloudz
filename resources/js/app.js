@@ -60,38 +60,39 @@ document.addEventListener('alpine:init', () => {
 });
 
 // Testimonial 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const slides = document.getElementById('testimonial-slides');
-//     const prevButton = document.getElementById('prev-slide');
-//     const nextButton = document.getElementById('next-slide');
-//     let currentIndex = 0;
+document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.getElementById('testimonial-slides');
+    const prevButton = document.getElementById('prev-slide');
+    const nextButton = document.getElementById('next-slide');
+    let currentIndex = 0;
 
-//     const updateCarousel = () => {
-//         const slideWidth = slides.children[0].offsetWidth;
-//         slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-//     };
+    const updateCarousel = () => {
+        const slideWidth = slides.children[0].offsetWidth;
+        slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    };
 
-//     prevButton.addEventListener('click', () => {
-//         if (currentIndex > 0) currentIndex--;
-//         updateCarousel();
-//     });
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) currentIndex--;
+        updateCarousel();
+    });
 
-//     nextButton.addEventListener('click', () => {
-//         if (currentIndex < slides.children.length - 1) currentIndex++;
-//         updateCarousel();
-//     });
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < slides.children.length - 1) currentIndex++;
+        updateCarousel();
+    });
 
-//     window.addEventListener('resize', updateCarousel); // Adjust on window resize
-// });
-
+    window.addEventListener('resize', updateCarousel); // Adjust on window resize
+});
 
 
 // Calendar
+
 document.addEventListener("DOMContentLoaded", async () => {
     const calendarContainer = document.getElementById("calendar");
     const currentMonthLabel = document.getElementById("current-month");
     const selectedSlotsList = document.getElementById("selectedSlotsList");
     const slotDetailsPanel = document.getElementById("slotDetailsPanel");
+    // const bookingSummary = document.getElementById("bookingSummary");
 
     let currentMonth = dayjs().startOf("month");
     let availableSlots = [];
@@ -144,7 +145,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         document.querySelectorAll(".calendar-day").forEach(dayElement => {
             dayElement.addEventListener("click", function () {
-                if (this.classList.contains("no-slot")) return; // Ignore unavailable days
+                if (this.classList.contains("no-slot")) return;
 
                 const selectedDate = this.dataset.date;
                 const slotsForDate = availableSlots.filter(slot => slot.date === selectedDate);
@@ -160,6 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 updateSlotDetailsPanel();
+                // updateBookingSummary(); // Update summary when slots change
             });
         });
     };
@@ -188,6 +190,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
+
     document.getElementById("prev-month").addEventListener("click", () => {
         currentMonth = currentMonth.subtract(1, "month");
         renderCalendar();
@@ -199,4 +202,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
     await renderCalendar();
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const searchIcon = document.getElementById("searchIcon");
+    const searchBar = document.getElementById("searchBar");
+
+    searchIcon.addEventListener("click", function () {
+        // Toggle the visibility of the search bar
+        if (searchBar.classList.contains("hidden")) {
+            searchBar.classList.remove("hidden");
+        } else {
+            searchBar.classList.add("hidden");
+        }
+    });
+});
+
+document.addEventListener("click", function (event) {
+    const searchIcon = document.getElementById("searchIcon");
+    const searchBar = document.getElementById("searchBar");
+
+    // Check if the clicked element is outside the search icon and search bar
+    if (!searchBar.contains(event.target) && !searchIcon.contains(event.target)) {
+        searchBar.classList.add("hidden");
+    }
 });

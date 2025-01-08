@@ -22,6 +22,7 @@
         </h2>
     </section>
 
+    
         <!-- How It Works -->
     <section class="mt-16 bg-gray-200 dark:bg-gray-800 py-12">
         <h2 class="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-10">
@@ -98,27 +99,36 @@
     <!-- Booking Form Section -->
     <div id="bookingFormSection" class="hidden transition-all duration-500">
         <!-- Step Indicators -->
-        <div class="flex justify-center space-x-4 mb-6">
-            <div class="step-indicator active" id="indicator-1">1</div>
-            <div class="step-indicator" id="indicator-2">2</div>
-            <div class="step-indicator" id="indicator-3">3</div>
-            <div class="step-indicator" id="indicator-4">4</div>
-            <div class="step-indicator" id="indicator-5">5</div>
+        <div class="flex justify-center space-x-4 mb-6 step-indicator-container">
+            <div class="step-indicator active" id="indicator-1">Select Mentorship</div>
+            <div class="step-indicator" id="indicator-2">Available Slot</div>
+            <div class="step-indicator" id="indicator-3">Personal Info</div>
+            <div class="step-indicator" id="indicator-4">Summary</div>
+            <div class="step-indicator" id="indicator-5">Confirmation</div>
         </div>
 
         <!-- Steps -->
         <div id="step-1" class="step">
             <h3 class="text-xl font-bold mb-4">Select a Mentorship Service</h3>
-            <label for="serviceDropdown" class="block text-sm font-bold mb-2">Service</label>
+            <!-- <label for="serviceDropdown" class="block text-sm font-bold mb-2">Service</label>
             <select id="serviceDropdown" name="service" class="w-full mb-4 p-2 border rounded">
-                <!-- Dynamically populated options -->
+        
             </select>
 
             <label for="typeDropdown" class="block text-sm font-bold mb-2">Type</label>
             <select id="typeDropdown" name="type" class="w-full mb-4 p-2 border rounded">
-                <!-- Dynamically populated options -->
+           
+            </select> -->
+            <select id="serviceDropdown" name="service" class="form-control">
+                <option value="">Select Service</option>
             </select>
 
+            <select id="typeDropdown" name="type" class="form-control">
+                <option value="">Select Type</option>
+            </select>
+            <select id="topicDropdown" name="topic" class="form-control">
+                <option value="">Select Topic</option>
+            </select>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
@@ -142,21 +152,9 @@
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
 
-       <div id="step-3" class="step hidden">
-            <h3 class="text-xl font-bold mb-4">Booking Summary</h3>
-            <div id="bookingSummary" class="bg-gray-100 p-4 rounded">
-                <!-- Summary dynamically populated -->
-                <p><strong>Service:</strong> <span id="summary-service"></span></p>
-                <p><strong>Type:</strong> <span id="summary-type"></span></p>
-                <p><strong>Date:</strong> <span id="summary-date"></span></p>
-                <p><strong>Time:</strong> <span id="summary-time"></span></p>
-                <p><strong>Price:</strong> <span id="summary-price"></span></p>
-            </div>
-            <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
-            <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
-        </div>
+     
 
-          <div id="step-4" class="step hidden">
+          <div id="step-3" class="step hidden">
             <h3 class="text-lg font-bold mb-4">Your Details</h3>
             <p class="mb-4">Please provide your details to proceed with the booking.</p>
             <div class="mb-4">
@@ -172,6 +170,16 @@
                 <input id="user-phone" type="tel" class="w-full border rounded px-2 py-2" placeholder="Enter your phone number">
             </div>
 
+            <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
+            <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
+        </div>
+
+
+        <div id="step-4" class="step hidden">
+       <h3 class="text-xl font-bold mb-4">Review Your Booking</h3>
+            <div id="bookingSummary" class="bg-gray-100 p-4 rounded summary-container">
+
+            </div>
             <button onclick="prevStep()" class="bg-gray-300 text-gray-700 px-6 py-2 rounded mr-4">Back</button>
             <button onclick="nextStep()" class="bg-green-500 text-white px-6 py-2 rounded">Next</button>
         </div>
@@ -213,6 +221,8 @@
 
 <script>
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
     let currentStep = 0;
     const steps = document.querySelectorAll(".step");
@@ -221,11 +231,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const notificationSection = document.getElementById("notificationSection");
     const toggleFormButton = document.getElementById("toggleFormButton");
 
+    let selectedSlots = []; // To store selected slots
+
     function showStep(step) {
         steps.forEach((el, index) => {
             el.classList.toggle("hidden", index !== step);
             stepIndicators[index].classList.toggle("active", index === step);
         });
+
+        // Update the summary when reaching the summary step
+        if (step === 3) {
+            updateSummary();
+        }
     }
 
     toggleFormButton.addEventListener("click", function () {
@@ -248,78 +265,80 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     window.submitForm = function () {
-    // Display the notification section
-    notificationSection.classList.remove("hidden");
+        // Display notification
+        notificationSection.classList.remove("hidden");
 
-    // Hide the form section
-    formSection.classList.add("hidden");
+        // Reset form and selections
+        formSection.classList.add("hidden");
+        currentStep = 0;
+        showStep(0);
 
-    // Reset the form to its initial state
-    currentStep = 0;
-    showStep(0);
+        document.getElementById("serviceDropdown").value = "";
+        document.getElementById("typeDropdown").value = "";
+        document.getElementById("topicDropdown").value = "";
+        document.getElementById("user-name").value = "";
+        document.getElementById("user-email").value = "";
+        document.getElementById("payment-method").value = "";
+        document.getElementById("card-number").value = "";
+        document.getElementById("expiry-date").value = "";
+        document.getElementById("cvv").value = "";
+        selectedSlots = [];
+        document.getElementById("selectedSlotsList").innerHTML = "";
 
-    // Clear input fields and selections
-    document.getElementById("serviceDropdown").value = "";
-    document.getElementById("typeDropdown").value = "";
-    document.getElementById("user-name").value = "";
-    document.getElementById("user-email").value = "";
-    document.getElementById("payment-method").value = "";
-    document.getElementById("card-number").value = "";
-    document.getElementById("expiry-date").value = "";
-    document.getElementById("cvv").value = "";
-    // Scroll back to the Request Mentorship button
-    toggleFormButton.scrollIntoView({ behavior: "smooth" });
-};
+        toggleFormButton.scrollIntoView({ behavior: "smooth" });
 
+        setTimeout(() => {
+            notificationSection.classList.add("hidden");
+        }, 5000);
+    };
+
+    window.hideNotification = function () {
+        notificationSection.classList.add("hidden");
+    };
+
+    // Function to dynamically update the booking summary
+   
+    const updateSummary = () => {
+        const service = document.querySelector("#serviceDropdown").options[document.querySelector("#serviceDropdown").selectedIndex].text || "Not selected";
+        const type =  document.querySelector("#typeDropdown").options[document.querySelector("#typeDropdown").selectedIndex].text  || "Not selected";
+        const topic =  document.querySelector("#topicDropdown").options[document.querySelector("#topicDropdown").selectedIndex].text || "Not selected";
+        const price = document.querySelector("#priceInput")?.value || "Not provided";
+
+        const summaryContainer = document.getElementById("bookingSummary");
+        const slotsSummary = selectedSlots
+            .map(
+                (slot) => `<li>${slot.date} (${slot.startTime} - ${slot.endTime})</li>`
+            )
+            .join("");
+
+        
+            summaryContainer.innerHTML = `
+            <p><strong>Service:</strong> ${service}</p>
+            <p><strong>Type:</strong> ${type}</p>
+            <p><strong>Topic:</strong> ${topic}</p>
+            <p><strong>Price:</strong> ${price}</p>
+            <p><strong>Slots:</strong></p>
+            <ul>${slotsSummary || "<li>No slots selected</li>"}</ul>
+        `;
+    };
+
+    // Example function to handle slot selection (integrate into slot click logic)
+    window.addSlotToSelection = function (slotData) {
+        selectedSlots.push(slotData);
+        updateSummary(); // Update the summary immediately when a slot is added
+    };
+    // if (currentstep === 3) {
+    //         updateSummary();
+    //     }
 });
 
-// const calendar = document.getElementById("booking-calendar").fullCalendar;
-// if (calendar) {
-//     calendar.unselect(); // Unselect any selected date/time
-// }
-
-setTimeout(() => {
-    notificationSection.classList.add("hidden");
-}, 5000); // Hide after 5 seconds
-window.hideNotification = function () {
-    notificationSection.classList.add("hidden");
-};
-
-console.log("Form reset and ready for the next request!");
 
 
-// Add logic for populating the summary dynamically in nextStep()
-function populateSummary() {
-    document.getElementById("summary-service").innerText = document.getElementById("serviceDropdown").value;
-    document.getElementById("summary-type").innerText = document.getElementById("typeDropdown").value;
-    document.getElementById("summary-slot").innerText = selectedSlot || "Not selected";
-    document.getElementById("summary-name").innerText = document.getElementById("user-name").value;
-    document.getElementById("summary-email").innerText = document.getElementById("user-email").value;
-    // document.getElementById("summary-phone").innerText = document.getElementById("user-phone").value;
-}
-
-// Trigger summary population on Step 4
-
-const updateSummary = () => {
-  const service = document.querySelector('select[name="service"]').value;
-  const type = document.querySelector('select[name="type"]').value;
-  const slot = selectedSlot || "Not selected"; // Assuming `selectedSlot` is populated when selecting a time
-
-  const summaryContainer = document.querySelector('#bookingSummary');
-  summaryContainer.innerHTML = `
-    <p><strong>Service:</strong> ${service}</p>
-    <p><strong>Type:</strong> ${type}</p>
-    <p><strong>Slot:</strong> ${slot}</p>
-  `;
-};
-
-// Call updateSummary() on moving to Step 3
-
-
+// service drop menu
 document.addEventListener('DOMContentLoaded', function () {
     const serviceDropdown = document.getElementById('serviceDropdown');
     const typeDropdown = document.getElementById('typeDropdown');
-
+    const topicDropdown = document.getElementById('topicDropdown');
     // Fetch mentorship services
     fetch('/api/mentorship-services')
         .then(response => {
@@ -358,11 +377,44 @@ document.addEventListener('DOMContentLoaded', function () {
                     option.textContent = type.type;
                     typeDropdown.appendChild(option);
                 });
+
+                typeDropdown.addEventListener("change", function () {
+                const selectedTypeValue = this.value; // Get the value of the selected option
+                const selectedType = this.options[this.selectedIndex].text; // Get the text of the selected option
+
+                console.log("Selected Value:", selectedTypeValue);
+                console.log("Selected Text:", selectedType);
+            });
+
             } else {
                 console.error('Error: ', data);
             }
         })
         .catch(error => console.error('Error fetching mentorship types:', error));
+
+    // fetch topics 
+
+    fetch('/api/mentorship-topics')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                data.data.forEach(topic => {
+                    const option = document.createElement('option');
+                    option.value = topic.id;
+                    option.textContent = topic.name;
+                    topicDropdown.appendChild(option);
+                });
+            } else {
+                console.error('Error: ', data);
+            }
+        })
+        .catch(error => console.error('Error fetching mentorship topics:', error));
+
 
         document.getElementById("payment-method").addEventListener("change", (e) => {
         const creditCardDetails = document.getElementById("credit-card-details");
