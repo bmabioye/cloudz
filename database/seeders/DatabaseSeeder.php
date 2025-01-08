@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(
-            AvailabilitySeeder::class,
-            BookingSeeder::class,
+            CategoriesSeeder::class,
+            PlansSeeder::class,
         );
     }
 }

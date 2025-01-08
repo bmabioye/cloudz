@@ -1,5 +1,5 @@
 <nav 
-     :class="darkMode ? 'bg-gray-900 text-gray-100' : 'bg-gray-800 text-white'"
+     :class="darkMode ? 'bg-gray-900 text-gray-100' : 'bg-blue-800 text-white'"
     class="sticky top-0 z-50 shadow-md transition-colors duration-300"
     x-data="{ isOpen: false }"
 >

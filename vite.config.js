@@ -22,4 +22,7 @@ export default defineConfig({
     optimizeDeps: {
         include: ['@fullcalendar/core', '@fullcalendar/daygrid', '@fullcalendar/timegrid', '@fullcalendar/interaction'],
     },
+    css: {
+        devSourcemap: false, // Disables CSS source maps, reducing warnings
+    },
 });
