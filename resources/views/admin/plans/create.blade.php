@@ -1,44 +1,41 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4">Add New Plan</h1>
+<div>
+    <h1>{{ isset($coupon) ? 'Edit' : 'Add' }} Coupon</h1>
 
-    <form action="{{ route('plans.store') }}" method="POST" class="bg-white p-6 shadow-md rounded">
+    <form action="{{ isset($coupon) ? route('coupons.update', $coupon->id) : route('coupons.store') }}" method="POST">
         @csrf
+        @if (isset($coupon))
+            @method('PUT')
+        @endif
 
-        <div class="mb-4">
-            <label for="name" class="block font-medium mb-2">Plan Name</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-            @error('name') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+        <div class="form-group">
+            <label for="code">Code</label>
+            <input type="text" name="code" id="code" class="form-control" value="{{ old('code', $coupon->code ?? '') }}" required>
         </div>
 
-        <div class="mb-4">
-            <label for="price" class="block font-medium mb-2">Price ($)</label>
-            <input type="number" step="0.01" name="price" id="price" value="{{ old('price') }}" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-            @error('price') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+        <div class="form-group">
+            <label for="discount_percentage">Discount Percentage</label>
+            <input type="number" name="discount_percentage" id="discount_percentage" class="form-control" value="{{ old('discount_percentage', $coupon->discount_percentage ?? '') }}" required>
         </div>
 
-        <div class="mb-4">
-            <label for="duration" class="block font-medium mb-2">Duration</label>
-            <select name="duration" id="duration" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-                <option value="monthly" {{ old('duration') === 'monthly' ? 'selected' : '' }}>Monthly</option>
-                <option value="yearly" {{ old('duration') === 'yearly' ? 'selected' : '' }}>Yearly</option>
-            </select>
-            @error('duration') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+        <div class="form-group">
+            <label for="valid_from">Valid From</label>
+            <input type="datetime-local" name="valid_from" id="valid_from" class="form-control" value="{{ old('valid_from', optional($coupon->valid_from)->format('Y-m-d\TH:i') ?? '') }}">
         </div>
 
-        <div class="mb-4">
-            <label for="features" class="block font-medium mb-2">Features (comma-separated)</label>
-            <textarea name="features" id="features" rows="3" class="w-full border-gray-300 rounded-lg shadow-sm" required>{{ old('features') }}</textarea>
-            <small class="text-gray-500">Separate each feature with a comma.</small>
-            @error('features') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+        <div class="form-group">
+            <label for="valid_until">Valid Until</label>
+            <input type="datetime-local" name="valid_until" id="valid_until" class="form-control" value="{{ old('valid_until', optional($coupon->valid_until)->format('Y-m-d\TH:i') ?? '') }}">
         </div>
 
-        <div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save</button>
-            <a href="{{ route('plans.index') }}" class="text-gray-500 hover:underline ml-4">Cancel</a>
+        <div class="form-group">
+            <label for="usage_limit">Usage Limit</label>
+            <input type="number" name="usage_limit" id="usage_limit" class="form-control" value="{{ old('usage_limit', $coupon->usage_limit ?? '') }}">
         </div>
+
+        <button type="submit" class="btn btn-success">{{ isset($coupon) ? 'Update' : 'Create' }}</button>
     </form>
 </div>
 @endsection

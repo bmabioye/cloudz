@@ -8,10 +8,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MentorshipController;
-use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CouponController;
+use App\Http\Controllers\AdminResourceController;
+use App\Http\Controllers\AdminPlanController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminCouponController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -50,25 +50,63 @@ Route::prefix('services')->group(function () {
     Route::get('/subscription-plans', [ServiceController::class, 'subscriptions'])->name('services.subscription-plans');
 });
 
-
-
-Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-    // Add other admin routes here
-});
-
-
 // Admin Routes
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         return view('admin.dashboard'); // Admin dashboard view
     })->name('admin.dashboard');
-
-    Route::resource('resources', ResourceController::class);
-    Route::resource('plans', PlanController::class);
-    Route::resource('categories', CategoryController::class);
-    Route::resource('coupons', CouponController::class);
 });
+
+Route::middleware(['auth', 'is_admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/resources', [AdminResourceController::class, 'index'])->name('admin.resources.index');
+        Route::get('/categories', [AdminCategoryController::class, 'index'])->name('admin.categories.index');
+        Route::get('/plans', [AdminPlanController::class, 'index'])->name('admin.plans.index');
+        Route::get('/coupons', [AdminCouponController::class, 'index'])->name('admin.coupons.index');
+        // Add more admin routes here...
+    });
+});
+
+
+
+
+// Admin Subscription Plans CRUD Routes
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    // Route::get('/plans', [AdminPlanController::class, 'index'])->name('plans.index');
+    Route::get('/plans/create', [AdminPlanController::class, 'create'])->name('plans.create');
+    Route::post('/plans', [AdminPlanController::class, 'store'])->name('plans.store');
+    Route::get('/plans/{plan}/edit', [AdminPlanController::class, 'edit'])->name('plans.edit');
+    Route::put('/plans/{plan}', [AdminPlanController::class, 'update'])->name('plans.update');
+    Route::delete('/plans/{plan}', [AdminPlanController::class, 'destroy'])->name('plans.destroy');
+});
+
+
+// Admin CRUD Routes for Categories
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    // Route::get('/categories', [AdminCategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/create', [AdminCategoryController::class, 'create'])->name('categories.create');
+    Route::post('/categories', [AdminCategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/{category}/edit', [AdminCategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}', [AdminCategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [AdminCategoryController::class, 'destroy'])->name('categories.destroy');
+
+    // Admin CRUD Routes for Resources
+    // Route::get('/resources', [AdminResourceController::class, 'index'])->name('resources.index');
+    Route::get('/resources/create', [AdminResourceController::class, 'create'])->name('resources.create');
+    Route::post('/resources', [AdminResourceController::class, 'store'])->name('resources.store');
+    Route::get('/resources/{resource}/edit', [AdminResourceController::class, 'edit'])->name('resources.edit');
+    Route::put('/resources/{resource}', [AdminResourceController::class, 'update'])->name('resources.update');
+    Route::delete('/resources/{resource}', [AdminResourceController::class, 'destroy'])->name('resources.destroy');
+
+    // Admin CRUD Routes for Coupons
+    // Route::get('/coupons', [AdminCouponController::class, 'index'])->name('coupons.index');
+    Route::get('/coupons/create', [AdminCouponController::class, 'create'])->name('coupons.create');
+    Route::post('/coupons', [AdminCouponController::class, 'store'])->name('coupons.store');
+    Route::get('/coupons/{coupon}/edit', [AdminCouponController::class, 'edit'])->name('coupons.edit');
+    Route::put('/coupons/{coupon}', [AdminCouponController::class, 'update'])->name('coupons.update');
+    Route::delete('/coupons/{coupon}', [AdminCouponController::class, 'destroy'])->name('coupons.destroy');
+});
+
 
 // Include authentication routes from Breeze
 require __DIR__ . '/auth.php';

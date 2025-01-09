@@ -16,16 +16,16 @@
             <nav class="mt-4">
                 <ul class="space-y-2">
                     <li>
-                        <a href="{{ route('resources.index') }}" class="block px-4 py-2 hover:bg-gray-700">Resources</a>
+                        <a href="{{ route('admin.resources.index') }}" class="block px-4 py-2 hover:bg-gray-700">Resources</a>
                     </li>
                     <li>
-                        <a href="{{ route('plans.index') }}" class="block px-4 py-2 hover:bg-gray-700">Plans</a>
+                        <a href="{{ route('admin.plans.index') }}" class="block px-4 py-2 hover:bg-gray-700">Plans</a>
                     </li>
                     <li>
-                        <a href="{{ route('categories.index') }}" class="block px-4 py-2 hover:bg-gray-700">Categories</a>
+                        <a href="{{ route('admin.categories.index') }}" class="block px-4 py-2 hover:bg-gray-700">Categories</a>
                     </li>
                     <li>
-                        <a href="{{ route('coupons.index') }}" class="block px-4 py-2 hover:bg-gray-700">Coupons</a>
+                        <a href="{{ route('admin.coupons.index') }}" class="block px-4 py-2 hover:bg-gray-700">Coupons</a>
                     </li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST" class="block px-4 py-2 hover:bg-gray-700">

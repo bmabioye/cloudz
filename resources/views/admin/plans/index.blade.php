@@ -29,11 +29,11 @@
                     <td class="border p-4">${{ number_format($plan->price, 2) }}</td>
                     <td class="border p-4">{{ ucfirst($plan->duration) }}</td>
                     <td class="border p-4">
-                        <ul>
-                            @foreach($plan->features as $feature)
-                                <li>{{ $feature }}</li>
-                            @endforeach
-                        </ul>
+                    <ul>
+                        @foreach($plan->features ?? [] as $feature)
+                            <li>{{ $feature }}</li>
+                        @endforeach
+                    </ul>
                     </td>
                     <td class="border p-4">
                         <a href="{{ route('plans.edit', $plan->id) }}" class="text-blue-500 hover:underline">Edit</a>

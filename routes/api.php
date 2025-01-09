@@ -5,10 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MentorshipController;
-use App\Http\Controllers\ResourceController;
-use App\Http\Controllers\PlanController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CouponController;
+use App\Http\Controllers\AdminResourceController;
+use App\Http\Controllers\AdminPlanController;
+use App\Http\Controllers\AdminCategoryController;
+use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 
 
