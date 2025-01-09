@@ -1,13 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Livewire\Actions\Logout;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MentorshipController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
 
 // Default Breeze Routes
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('welcome');
 
 Route::view('/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -17,9 +24,11 @@ Route::view('/profile', 'profile')
     ->middleware('auth')
     ->name('profile');
 
+Route::post('/logout', Logout::class)->name('logout');
+
 // CloudZone Custom Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-// Route::get('/mentorship', [HomeController::class, 'mentorship'])->name('mentorship');
+
 
 
 Route::get('/mentorship/booking', [MentorshipController::class, 'showBookingForm'])->name('mentorship.booking');
@@ -41,6 +50,25 @@ Route::prefix('services')->group(function () {
     Route::get('/subscription-plans', [ServiceController::class, 'subscriptions'])->name('services.subscription-plans');
 });
 
+
+
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    // Add other admin routes here
+});
+
+
+// Admin Routes
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', function () {
+        return view('admin.dashboard'); // Admin dashboard view
+    })->name('admin.dashboard');
+
+    Route::resource('resources', ResourceController::class);
+    Route::resource('plans', PlanController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::resource('coupons', CouponController::class);
+});
 
 // Include authentication routes from Breeze
 require __DIR__ . '/auth.php';

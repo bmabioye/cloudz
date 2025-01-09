@@ -2,8 +2,15 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MentorshipController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\PlanController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services
@@ -37,3 +44,12 @@ Route::middleware([])->group(function () {
     Route::get('/mentorship-types', [MentorshipController::class, 'getMentorshipTypes']);
     Route::get('/mentorship-topics', [MentorshipController::class, 'getMentorshipTopics']); 
 });
+
+
+Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function () {
+    Route::resource('resources', AdminResourceController::class);
+    Route::resource('categories', AdminCategoryController::class);
+    Route::resource('plans', AdminPlanController::class);
+    Route::resource('coupons', AdminCouponController::class);
+});
+

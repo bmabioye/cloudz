@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(
-            CategoriesSeeder::class,
-            PlansSeeder::class,
+            // CategoriesSeeder::class,
+            ResourcesTableSeeder::class,
         );
     }
 }

@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory;
-
     protected $fillable = ['name', 'slug'];
+
+    public function resources()
+    {
+        return $this->hasMany(Resource::class);
+    }
 
 }

@@ -225,7 +225,7 @@ document.addEventListener("click", function (event) {
     const searchBar = document.getElementById("searchBar");
 
     // Check if the clicked element is outside the search icon and search bar
-    if (!searchBar.contains(event.target) && !searchIcon.contains(event.target)) {
-        searchBar.classList.add("hidden");
-    }
+    // if (!searchBar.contains(event.target) && !searchIcon.contains(event.target)) {
+    //     searchBar.classList.add("hidden");
+    // }
 });
