@@ -30,6 +30,8 @@ class AdminCouponController extends Controller
             'valid_until' => 'nullable|date|after:valid_from',
             'usage_limit' => 'nullable|integer|min:1',
         ]);
+
+        $validated['used_count'] = 0; // Initialize `used_count`
     
         Coupon::create($validated);
 

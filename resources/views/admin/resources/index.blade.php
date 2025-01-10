@@ -16,6 +16,7 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border p-4 text-left">Title</th>
+                    <th class="border p-4 text-left">Description</th>
                     <th class="border p-4 text-left">Category</th>
                     <th class="border p-4 text-left">Price</th>
                     <th class="border p-4 text-left">Actions</th>
@@ -25,6 +26,7 @@
                 @foreach($resources as $resource)
                 <tr class="hover:bg-gray-100">
                     <td class="border p-4">{{ $resource->title }}</td>
+                    <td class="border p-4">{{ $resource->description ?? 'No Description' }}</td>
                     <td class="border p-4">{{ $resource->category->name ?? 'Uncategorized' }}</td>
                     <td class="border p-4">${{ number_format($resource->price, 2) }}</td>
                     <td class="border p-4">

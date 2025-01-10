@@ -29,7 +29,7 @@
                     <td class="border p-4">{{ $coupon->code }}</td>
                     <td class="border p-4">
                         @if($coupon->discount_type === 'percentage')
-                            {{ $coupon->discount_percentage }}%
+                            {{  number_format($coupon->discount_amount, 0) }}%
                         @else
                             ${{ number_format($coupon->discount_amount, 2) }}
                         @endif

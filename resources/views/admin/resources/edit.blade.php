@@ -46,8 +46,8 @@
         </div>
 
         <div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update</button>
-            <a href="{{ route('resources.index') }}" class="text-gray-500 hover:underline ml-4">Cancel</a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update Resource</button>
+            <a href="{{ route('admin.resources.index') }}" class="text-gray-500 hover:underline ml-4">Cancel</a>
         </div>
     </form>
 </div>
