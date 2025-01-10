@@ -13,28 +13,33 @@
 
     <div class="overflow-x-auto">
         <table class="w-full border-collapse bg-white shadow-md">
-            <thead>
-                <tr class="bg-gray-200">
-                    <th class="border p-4 text-left">Code</th>
-                    <th class="border p-4 text-left">Discount</th>
-                    <th class="border p-4 text-left">Type</th>
-                    <th class="border p-4 text-left">Expiry Date</th>
-                    <th class="border p-4 text-left">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($coupons as $coupon)
+        <thead>
+            <tr class="bg-gray-200">
+                <th class="border p-4 text-left">Code</th>
+                <th class="border p-4 text-left">Discount</th>
+                <th class="border p-4 text-left">Type</th>
+                <th class="border p-4 text-left">Validity</th>
+                <th class="border p-4 text-left">Usage</th>
+                <th class="border p-4 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($coupons as $coupon)
                 <tr class="hover:bg-gray-100">
                     <td class="border p-4">{{ $coupon->code }}</td>
                     <td class="border p-4">
-                        @if($coupon->type === 'percentage')
-                            {{ $coupon->value }}%
+                        @if($coupon->discount_type === 'percentage')
+                            {{ $coupon->discount_percentage }}%
                         @else
-                            ${{ number_format($coupon->value, 2) }}
+                            ${{ number_format($coupon->discount_amount, 2) }}
                         @endif
                     </td>
-                    <td class="border p-4">{{ ucfirst($coupon->type) }}</td>
-                    <td class="border p-4">{{ $coupon->expiry_date ? $coupon->expiry_date->format('M d, Y') : 'No Expiry' }}</td>
+                    <td class="border p-4">{{ ucfirst($coupon->discount_type) }}</td>
+                    <td class="border p-4">
+                        {{ $coupon->valid_from ? $coupon->valid_from->format('M d, Y') : 'No Start Date' }} - 
+                        {{ $coupon->valid_until ? $coupon->valid_until->format('M d, Y') : 'No Expiry' }}
+                    </td>
+                    <td class="border p-4">{{ $coupon->used_count }} / {{ $coupon->usage_limit }}</td>
                     <td class="border p-4">
                         <a href="{{ route('coupons.edit', $coupon->id) }}" class="text-blue-500 hover:underline">Edit</a>
                         <form action="{{ route('coupons.destroy', $coupon->id) }}" method="POST" class="inline-block ml-2">
@@ -44,8 +49,9 @@
                         </form>
                     </td>
                 </tr>
-                @endforeach
-            </tbody>
+            @endforeach
+        </tbody>
+
         </table>
     </div>
 

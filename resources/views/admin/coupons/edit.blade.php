@@ -2,43 +2,71 @@
 
 @section('content')
 <div class="container mx-auto py-6">
-    <h1 class="text-2xl font-bold mb-4">Edit Coupon</h1>
+    <h2 class="text-2xl font-bold mb-4">Edit Coupon</h2>
 
-    <form action="{{ route('coupons.update', $coupon->id) }}" method="POST" class="bg-white p-6 shadow-md rounded">
+    <form action="{{ route('coupons.update', $coupon->id) }}" method="POST">
         @csrf
         @method('PUT')
 
         <div class="mb-4">
-            <label for="code" class="block font-medium mb-2">Coupon Code</label>
-            <input type="text" name="code" id="code" value="{{ old('code', $coupon->code) }}" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-            @error('code') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+            <label for="code" class="block text-sm font-medium text-gray-700">Coupon Code</label>
+            <input type="text" name="code" id="code" value="{{ old('code', $coupon->code) }}" 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            @error('code')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
-            <label for="type" class="block font-medium mb-2">Discount Type</label>
-            <select name="type" id="type" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-                <option value="percentage" {{ old('type', $coupon->type) === 'percentage' ? 'selected' : '' }}>Percentage</option>
-                <option value="fixed" {{ old('type', $coupon->type) === 'fixed' ? 'selected' : '' }}>Fixed Amount</option>
+            <label for="discount_amount" class="block text-sm font-medium text-gray-700">Discount Amount</label>
+            <input type="number" name="discount_amount" id="discount_amount" value="{{ old('discount_amount', $coupon->discount_amount) }}" 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            @error('discount_amount')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="mb-4">
+            <label for="discount_type" class="block text-sm font-medium text-gray-700">Discount Type</label>
+            <select name="discount_type" id="discount_type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                <option value="percentage" {{ old('discount_type', $coupon->discount_type) == 'percentage' ? 'selected' : '' }}>Percentage</option>
+                <option value="fixed" {{ old('discount_type', $coupon->discount_type) == 'fixed' ? 'selected' : '' }}>Fixed</option>
             </select>
-            @error('type') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+            @error('discount_type')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
-            <label for="value" class="block font-medium mb-2">Discount Value</label>
-            <input type="number" step="0.01" name="value" id="value" value="{{ old('value', $coupon->value) }}" class="w-full border-gray-300 rounded-lg shadow-sm" required>
-            @error('value') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+            <label for="valid_from" class="block text-sm font-medium text-gray-700">Valid From</label>
+            <input type="date" name="valid_from" id="valid_from" value="{{ old('valid_from', optional($coupon->valid_from)->format('Y-m-d')) }}" 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            @error('valid_from')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="mb-4">
-            <label for="expiry_date" class="block font-medium mb-2">Expiry Date</label>
-            <input type="date" name="expiry_date" id="expiry_date" value="{{ old('expiry_date', $coupon->expiry_date ? $coupon->expiry_date->format('Y-m-d') : '') }}" class="w-full border-gray-300 rounded-lg shadow-sm">
-            @error('expiry_date') <p class="text-red-500 text-sm mt-1">{{ $message }}</p> @enderror
+            <label for="valid_until" class="block text-sm font-medium text-gray-700">Valid Until</label>
+            <input type="date" name="valid_until" id="valid_until" value="{{ old('valid_until', optional($coupon->valid_until)->format('Y-m-d')) }}" 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            @error('valid_until')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
 
-        <div>
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Update</button>
-            <a href="{{ route('coupons.index') }}" class="text-gray-500 hover:underline ml-4">Cancel</a>
+        <div class="mb-4">
+            <label for="usage_limit" class="block text-sm font-medium text-gray-700">Usage Limit</label>
+            <input type="number" name="usage_limit" id="usage_limit" value="{{ old('usage_limit', $coupon->usage_limit) }}" 
+                class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            @error('usage_limit')
+            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
+
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Update Coupon
+        </button>
     </form>
 </div>
 @endsection

@@ -22,13 +22,15 @@ class AdminCouponController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'code' => 'required|string|max:255|unique:coupons,code',
-            'discount_percentage' => 'required|integer|min:0|max:100',
+            'code' => 'required|string|max:50|unique:coupons,code',
+            'discount_percentage' => 'nullable|numeric|min:0|max:100',
+            'discount_amount' => 'nullable|numeric|min:0',
+            'discount_type' => 'required|in:fixed,percentage',
             'valid_from' => 'nullable|date',
-            'valid_until' => 'nullable|date|after_or_equal:valid_from',
+            'valid_until' => 'nullable|date|after:valid_from',
             'usage_limit' => 'nullable|integer|min:1',
         ]);
-
+    
         Coupon::create($validated);
 
         return redirect()
@@ -44,13 +46,15 @@ class AdminCouponController extends Controller
     public function update(Request $request, Coupon $coupon)
     {
         $validated = $request->validate([
-            'code' => 'required|string|max:255|unique:coupons,code,' . $coupon->id,
-            'discount_percentage' => 'required|integer|min:0|max:100',
+            'code' => 'required|string|max:50|unique:coupons,code,' . $coupon->id,
+            'discount_percentage' => 'nullable|numeric|min:0|max:100',
+            'discount_amount' => 'nullable|numeric|min:0',
+            'discount_type' => 'required|in:fixed,percentage',
             'valid_from' => 'nullable|date',
-            'valid_until' => 'nullable|date|after_or_equal:valid_from',
+            'valid_until' => 'nullable|date|after:valid_from',
             'usage_limit' => 'nullable|integer|min:1',
         ]);
-
+    
         $coupon->update($validated);
 
         return redirect()

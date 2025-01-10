@@ -21,7 +21,7 @@ class CouponSeeder extends Seeder
                 'valid_until' => now()->addDays(90),
                 'usage_limit' => 0, // Unlimited usage
                 'used_count' => 0,
-            ]
+            ],
         ];
 
         foreach ($coupons as $coupon) {
