@@ -16,9 +16,11 @@
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border p-4 text-left">Name</th>
+                    <th class="border p-4 text-left">Description</th>
                     <th class="border p-4 text-left">Price</th>
-                    <th class="border p-4 text-left">Duration</th>
-                    <th class="border p-4 text-left">Features</th>
+                    <th class="border p-2 text-left">Duration (in Months)</th>
+                    <th class="border p-6 text-left">Features</th>
+                    <th class="border p-4 text-left">Status</th>
                     <th class="border p-4 text-left">Actions</th>
                 </tr>
             </thead>
@@ -26,8 +28,9 @@
                 @foreach($plans as $plan)
                 <tr class="hover:bg-gray-100">
                     <td class="border p-4">{{ $plan->name }}</td>
+                    <td class="border p-4">{{ $plan->description }}</td>
                     <td class="border p-4">${{ number_format($plan->price, 2) }}</td>
-                    <td class="border p-4">{{ ucfirst($plan->duration) }}</td>
+                    <td class="border p-4">{{ ucfirst($plan->duration_months) }}</td>
                     <td class="border p-4">
                     <ul>
                         @foreach($plan->features ?? [] as $feature)
@@ -36,11 +39,28 @@
                     </ul>
                     </td>
                     <td class="border p-4">
+                    <span class="{{ $plan->status === 'active' ? 'status-active' : 'status-disabled' }}">
+                        @if($plan->status === 'active')
+                            <i class="fas fa-check-circle"></i>
+                        @else
+                            <i class="fas fa-ban"></i>
+                        @endif
+                        {{ ucfirst($plan->status) }}
+                    </span>
+                    </td>
+                    <td class="border p-4">
                         <a href="{{ route('plans.edit', $plan->id) }}" class="text-blue-500 hover:underline">Edit</a>
                         <form action="{{ route('plans.destroy', $plan->id) }}" method="POST" class="inline-block ml-2">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this plan?')">Delete</button>
+                        </form>
+                        <form action="{{ route('plans.toggleStatus', $plan->id) }}" method="POST" class="inline-block ml-2">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-gray-500 hover:underline">
+                                {{ $plan->status === 'active' ? 'Disable' : 'Enable' }}
+                            </button>
                         </form>
                     </td>
                 </tr>

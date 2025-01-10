@@ -32,7 +32,7 @@ class AdminCouponController extends Controller
         Coupon::create($validated);
 
         return redirect()
-            ->route('coupons.index')
+            ->route('admin.coupons.index')
             ->with('success', 'Coupon added successfully!');
     }
 
@@ -54,7 +54,7 @@ class AdminCouponController extends Controller
         $coupon->update($validated);
 
         return redirect()
-            ->route('coupons.index')
+            ->route('admin.coupons.index')
             ->with('success', 'Coupon updated successfully!');
     }
 
@@ -63,7 +63,7 @@ class AdminCouponController extends Controller
         $coupon->delete();
 
         return redirect()
-            ->route('coupons.index')
+            ->route('admin.coupons.index')
             ->with('success', 'Coupon deleted successfully!');
     }
 }

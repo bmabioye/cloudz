@@ -78,6 +78,10 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/plans/{plan}/edit', [AdminPlanController::class, 'edit'])->name('plans.edit');
     Route::put('/plans/{plan}', [AdminPlanController::class, 'update'])->name('plans.update');
     Route::delete('/plans/{plan}', [AdminPlanController::class, 'destroy'])->name('plans.destroy');
+    Route::put('/plans/{plan}/enable', [AdminPlanController::class, 'enable'])->name('plans.enable');
+    Route::patch('/admin/plans/{plan}/toggle-status', [AdminPlanController::class, 'toggleStatus'])->name('plans.toggleStatus');
+
+
 });
 
 

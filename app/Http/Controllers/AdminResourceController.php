@@ -35,7 +35,7 @@ class AdminResourceController extends Controller
 
         Resource::create(array_merge($validated, ['file_path' => $filePath]));
 
-        return redirect()->route('resources.index')->with('success', 'Resource added successfully!');
+        return redirect()->route('admin.resources.index')->with('success', 'Resource added successfully!');
     }
 
     public function edit(Resource $resource)
@@ -60,12 +60,12 @@ class AdminResourceController extends Controller
             $resource->update($validated);
         }
 
-        return redirect()->route('resources.index')->with('success', 'Resource updated successfully!');
+        return redirect()->route('admin.resources.index')->with('success', 'Resource updated successfully!');
     }
 
     public function destroy(Resource $resource)
     {
         $resource->delete();
-        return redirect()->route('resources.index')->with('success', 'Resource deleted successfully!');
+        return redirect()->route('admin.resources.index')->with('success', 'Resource deleted successfully!');
     }
 }

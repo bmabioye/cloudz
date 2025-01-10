@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coupons', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('plans', function (Blueprint $table) {
+            $table->string('status')->default('active'); // active or disabled
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupons');
+        Schema::table('plans', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
     }
 };
