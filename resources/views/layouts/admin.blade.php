@@ -11,7 +11,9 @@
         {{-- Sidebar --}}
         <div class="w-64 bg-gray-800 text-white h-screen">
             <div class="p-4">
-                <h2 class="text-lg font-bold">Admin Panel</h2>
+                <h2 class="text-lg font-bold"><a  href="{{ route('home') }}">
+                Admin Panel
+                </a></h2>
             </div>
             <nav class="mt-4">
                 <ul class="space-y-2">

@@ -1,7 +1,9 @@
 import './bootstrap';
 import AOS from "aos";
 import "aos/dist/aos.css";
+import dayjs from 'dayjs';
 
+axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 // Initialize AOS
 AOS.init({
@@ -18,9 +20,9 @@ AOS.init({
 
 
 // app.js or the Alpine.js script
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
+// import Alpine from 'alpinejs';
+// window.Alpine = Alpine;
+// Alpine.start();
 
 Alpine.store('theme', {
     darkMode: localStorage.getItem('theme') === 'dark',
@@ -36,7 +38,7 @@ Alpine.store('theme', {
     },
 });
 
-Alpine.start();
+
 
 // Add a global Alpine store for dark mode
 // Initialize Alpine.js store for dark mode
@@ -58,31 +60,6 @@ document.addEventListener('alpine:init', () => {
             }
         },
     });
-});
-
-// Testimonial 
-document.addEventListener('DOMContentLoaded', () => {
-    const slides = document.getElementById('testimonial-slides');
-    const prevButton = document.getElementById('prev-slide');
-    const nextButton = document.getElementById('next-slide');
-    let currentIndex = 0;
-
-    const updateCarousel = () => {
-        const slideWidth = slides.children[0].offsetWidth;
-        slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    };
-
-    prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) currentIndex--;
-        updateCarousel();
-    });
-
-    nextButton.addEventListener('click', () => {
-        if (currentIndex < slides.children.length - 1) currentIndex++;
-        updateCarousel();
-    });
-
-    window.addEventListener('resize', updateCarousel); // Adjust on window resize
 });
 
 
@@ -191,16 +168,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     };
 
-
-    document.getElementById("prev-month").addEventListener("click", () => {
-        currentMonth = currentMonth.subtract(1, "month");
-        renderCalendar();
-    });
-
-    document.getElementById("next-month").addEventListener("click", () => {
+    const prevMonth = document.getElementById("prev-month");
+    if(prevMonth) {
+        prevMonth.addEventListener("click", () => {
+            currentMonth = currentMonth.subtract(1, "month");
+            renderCalendar();
+        });
+    }
+    
+    const comingMonth = document.getElementById("next-month");
+    if(comingMonth) {
+        comingMonth.addEventListener("click", () => {
         currentMonth = currentMonth.add(1, "month");
         renderCalendar();
     });
+
+    }
 
     await renderCalendar();
 });
@@ -210,14 +193,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const searchIcon = document.getElementById("searchIcon");
     const searchBar = document.getElementById("searchBar");
 
-    searchIcon.addEventListener("click", function () {
-        // Toggle the visibility of the search bar
-        if (searchBar.classList.contains("hidden")) {
-            searchBar.classList.remove("hidden");
-        } else {
-            searchBar.classList.add("hidden");
-        }
-    });
+    const element = document.getElementById('your-element-id');
+    if (searchIcon) {
+        searchIcon.addEventListener("click", function () {
+            // Toggle the visibility of the search bar
+            if (searchBar.classList.contains("hidden")) {
+                searchBar.classList.remove("hidden");
+            } else {
+                searchBar.classList.add("hidden");
+            }
+        });
+    }
+    
 });
 
 document.addEventListener("click", function (event) {
@@ -225,7 +212,7 @@ document.addEventListener("click", function (event) {
     const searchBar = document.getElementById("searchBar");
 
     // Check if the clicked element is outside the search icon and search bar
-    // if (!searchBar.contains(event.target) && !searchIcon.contains(event.target)) {
-    //     searchBar.classList.add("hidden");
-    // }
+    if (!searchBar.contains(event.target) && !searchIcon.contains(event.target)) {
+        searchBar.classList.add("hidden");
+    }
 });
