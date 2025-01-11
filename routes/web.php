@@ -28,6 +28,7 @@ Route::post('/logout', Logout::class)->name('logout');
 
 // CloudZone Custom Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/fastcert-library', [HomeController::class, 'fastcert'])->name('fastcert-library');
 
 
 
@@ -101,6 +102,10 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/resources/{resource}/edit', [AdminResourceController::class, 'edit'])->name('resources.edit');
     Route::put('/resources/{resource}', [AdminResourceController::class, 'update'])->name('resources.update');
     Route::delete('/resources/{resource}', [AdminResourceController::class, 'destroy'])->name('resources.destroy');
+    Route::patch('/resources/{id}/activate', [AdminResourceController::class, 'activate'])->name('resources.activate');
+    Route::patch('/resources/{id}/deactivate', [AdminResourceController::class, 'deactivate'])->name('resources.deactivate');
+
+
 
     // Admin CRUD Routes for Coupons
     // Route::get('/coupons', [AdminCouponController::class, 'index'])->name('coupons.index');

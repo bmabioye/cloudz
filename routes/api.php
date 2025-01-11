@@ -10,7 +10,9 @@ use App\Http\Controllers\AdminPlanController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-
+use App\Http\Controllers\Api\UserResourceController;
+use App\Http\Controllers\Api\SubscriptionPlanController;
+use App\Http\Controllers\Api\PurchaseController;
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services
@@ -53,3 +55,30 @@ Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function () {
     Route::resource('coupons', AdminCouponController::class);
 });
 
+// API Routes
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/resources', [UserResourceController::class, 'index']);
+});
+Route::get('/resources/{id}', [UserResourceController::class, 'show'])->middleware('auth:sanctum');
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/plans', [SubscriptionPlanController::class, 'index']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/subscriptions', [SubscriptionPlanController::class, 'store']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::delete('/subscriptions/{id}', [SubscriptionPlanController::class, 'cancel']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/subscriptions', [SubscriptionPlanController::class, 'list']);
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/purchases', [PurchaseController::class, 'list']); // List all purchases
+    Route::get('/purchases/{id}', [PurchaseController::class, 'show']); // Show specific purchase
+});

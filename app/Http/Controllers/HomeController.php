@@ -15,4 +15,9 @@ class HomeController extends Controller
     {
         return view('mentorship'); // Make sure `home.blade.php` exists
     }
+
+    public function fastcert()
+    {
+        return view('fastcert-library'); // Make sure `home.blade.php` exists
+    }
 }

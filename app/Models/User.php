@@ -51,4 +51,21 @@ class User extends Authenticatable
     {
         return $this->attributes['is_admin'] ?? false;
     }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    public function hasAccessToResource(Resource $resource)
+    {
+        if (!$resource->is_premium) {
+            return true; // Free resources are accessible to all
+        }
+
+        // Check if the user has purchased the resource
+        return $this->purchases()->where('resource_id', $resource->id)->exists();
+    }
+
+
 }

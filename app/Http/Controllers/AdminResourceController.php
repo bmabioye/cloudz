@@ -68,4 +68,18 @@ class AdminResourceController extends Controller
         $resource->delete();
         return redirect()->route('admin.resources.index')->with('success', 'Resource deleted successfully!');
     }
+
+    public function activate($id)
+    {
+        $resource = Resource::findOrFail($id);
+        $resource->update(['status' => 'active']);
+        return redirect()->route('admin.resources.index')->with('success', 'Resource activated successfully!');
+    }
+
+    public function deactivate($id)
+    {
+        $resource = Resource::findOrFail($id);
+        $resource->update(['status' => 'inactive']);
+        return redirect()->route('admin.resources.index')->with('success', 'Resource deactivated successfully!');
+    }
 }

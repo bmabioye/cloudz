@@ -45,4 +45,5 @@ class ServiceController extends Controller
     {
         return view('services.subscription-plans');
     }
+    
 }

@@ -36,6 +36,19 @@
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Are you sure you want to delete this resource?')">Delete</button>
                         </form>
+                        @if ($resource->status === 'active')
+                        <form action="{{ route('resources.deactivate', $resource->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-red-500 hover:underline">Deactivate</button>
+                        </form>
+                    @else
+                        <form action="{{ route('resources.activate', $resource->id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" class="text-green-500 hover:underline">Activate</button>
+                        </form>
+                    @endif
                     </td>
                 </tr>
                 @endforeach

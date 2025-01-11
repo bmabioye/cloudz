@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-    protected $fillable = ['title', 'description', 'price', 'category_id', 'file_path', 'is_premium'];
+    protected $fillable = ['title', 'description', 'price', 'category_id', 'file_path', 'is_premium', 'status'];
 
     public function category()
     {
@@ -16,5 +16,10 @@ class Resource extends Model
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
     }
 }
