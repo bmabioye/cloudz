@@ -67,5 +67,15 @@ class User extends Authenticatable
         return $this->purchases()->where('resource_id', $resource->id)->exists();
     }
 
+    public function hasAccessTo(Resource $resource)
+    {
+        // Check if the user has purchased this resource
+        $hasPurchased = $this->purchases()->where('resource_id', $resource->id)->exists();
+
+        // Check if the user has an active subscription
+        $hasSubscription = $this->subscriptions()->where('status', 'active')->exists();
+
+        return $hasPurchased || $hasSubscription;
+    }
 
 }

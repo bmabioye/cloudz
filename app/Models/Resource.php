@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Resource extends Model
 {
-    protected $fillable = ['title', 'description', 'price', 'category_id', 'file_path', 'is_premium', 'status'];
+    protected $fillable = [
+        'title', 'description', 'price', 'category_id', 'file_path', 'thumbnail', 'is_premium', 'status'
+    ];
 
     public function category()
     {

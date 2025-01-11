@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminResourceController;
 use App\Http\Controllers\AdminPlanController;
 use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
+use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\SubscriptionController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -28,14 +30,24 @@ Route::post('/logout', Logout::class)->name('logout');
 
 // CloudZone Custom Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/fastcert-library', [HomeController::class, 'fastcert'])->name('fastcert-library');
+Route::get('/fastcert', [HomeController::class, 'fastcert'])->name('fastcert.landing');
+Route::get('/fastcert/resources', [ResourceController::class, 'index'])->name('fastcert.resources');
+// For resource details
+Route::get('/fastcert/resources/{id}', [ResourceController::class, 'show'])->name('fastcert.show');
+
+// For subscription page
+Route::get('/fastcert/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
+Route::get('/fastcert/subscribe/{id}', [SubscriptionController::class, 'subscribe'])->name('subscription.subscribe');
+Route::get('/fastcert/purchase/{id}/buy', [ResourceController::class, 'showPurchasePage'])->name('resources.buy');
+Route::post('/fastcert/resources/{id}/purchase', [ResourceController::class, 'processPurchase'])->name('resources.processPurchase');
+Route::post('/resources/{id}/cart', [ResourceController::class, 'addToCart'])->name('resources.addToCart');
+Route::get('/cart', [ResourceController::class, 'viewCart'])->name('cart.index');
+Route::post('/cart/remove/{id}', [ResourceController::class, 'removeFromCart'])->name('cart.remove');
 
 
 
 Route::get('/mentorship/booking', [MentorshipController::class, 'showBookingForm'])->name('mentorship.booking');
 Route::post('/mentorship/booking', [MentorshipController::class, 'storeBooking'])->name('mentorship.booking.store');
-
-
 Route::get('/mentorship', [MentorshipController::class, 'landing'])->name('mentorship.landing');
 Route::get('/mentorship/{id}/book', [BookingController::class, 'book'])->name('mentorship.book');
 Route::post('/mentorship', [BookingController::class, 'store']); // Create booking

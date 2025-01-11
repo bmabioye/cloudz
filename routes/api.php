@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Api\UserResourceController;
 use App\Http\Controllers\Api\SubscriptionPlanController;
 use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\ResourceController;
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services
@@ -56,11 +57,12 @@ Route::prefix('admin')->middleware(AdminMiddleware::class)->group(function () {
 });
 
 // API Routes
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/resources', [UserResourceController::class, 'index']);
-});
+
+Route::get('/resources', [ResourceController::class, 'fetchResources']);
 Route::get('/resources/{id}', [UserResourceController::class, 'show'])->middleware('auth:sanctum');
 
+// Protected route for accessing premium resource details
+Route::get('/resources/{id}/access', [ResourceController::class, 'show'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/plans', [SubscriptionPlanController::class, 'index']);

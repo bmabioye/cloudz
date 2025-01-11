@@ -4,6 +4,8 @@ import "aos/dist/aos.css";
 import dayjs from 'dayjs';
 
 axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.withCredentials = true; // For Sanctum Authentication
 
 // Initialize AOS
 AOS.init({
@@ -118,8 +120,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             `;
         }
 
-        calendarContainer.innerHTML = calendarHTML;
-        currentMonthLabel.textContent = currentMonth.format("MMMM YYYY");
+        if(calendarContainer){
+            calendarContainer.innerHTML = calendarHTML;
+            currentMonthLabel.textContent = currentMonth.format("MMMM YYYY");
+        }
 
         document.querySelectorAll(".calendar-day").forEach(dayElement => {
             dayElement.addEventListener("click", function () {
@@ -216,3 +220,27 @@ document.addEventListener("click", function (event) {
         searchBar.classList.add("hidden");
     }
 });
+
+// Control access to view Premium resources
+function accessResource(resourceId) {
+    axios.get(`/api/resources/${resourceId}/access`, {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`
+        }
+    })
+    .then(response => {
+        console.log('Resource details:', response.data);
+        // Show resource details
+    })
+    .catch(error => {
+        if (error.response && error.response.status === 403) {
+            alert('You need to purchase or subscribe to access this resource.');
+        } else {
+            console.error('Error accessing resource:', error);
+        }
+    });
+}
+
+
+
+

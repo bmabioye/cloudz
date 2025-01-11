@@ -6,26 +6,8 @@
         <div class="text-center bg-gray-800 text-white py-16 rounded-lg shadow-md">
             <h1 class="text-5xl font-bold mb-4">Welcome to FastCert Library</h1>
             <p class="text-lg mb-6">Your ultimate destination for premium certification resources.</p>
-            <a href="#explore" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full">Explore Now</a>
+            <a href="{{ route('fastcert.resources') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full">Explore Now</a>
         </div>
-
-        <!-- Features Section -->
-        <!-- <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white shadow rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold mb-4">Extensive Resource Library</h2>
-                <p class="text-gray-600">Access hundreds of ebooks, training guides, and more.</p>
-            </div>
-
-            <div class="bg-white shadow rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold mb-4">Flexible Subscription Plans</h2>
-                <p class="text-gray-600">Choose a subscription that fits your needs and budget.</p>
-            </div>
-
-            <div class="bg-white shadow rounded-lg p-6 text-center">
-                <h2 class="text-xl font-bold mb-4">Certification Assistance</h2>
-                <p class="text-gray-600">Achieve certifications with curated resources tailored to your goals.</p>
-            </div>
-        </div> -->
 
     <!-- Features Section -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -60,8 +42,8 @@
 
     <!-- Call to Action -->
     <div class="mt-12 text-center">
-        <a href="#" class="cta-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium">
-            Start Today
+        <a href="{{ route('subscription.index') }}" class="cta-btn bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full font-medium">
+            Access All Resources
         </a>
     </div>
 </div>

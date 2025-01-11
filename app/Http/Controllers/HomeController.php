@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Resource;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
@@ -18,6 +20,6 @@ class HomeController extends Controller
 
     public function fastcert()
     {
-        return view('fastcert-library'); // Make sure `home.blade.php` exists
+        return view('fastcert.landing'); // Make sure `home.blade.php` exists
     }
 }
