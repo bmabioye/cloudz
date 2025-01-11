@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\CheckoutController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -36,6 +37,7 @@ Route::get('/fastcert/resources', [ResourceController::class, 'index'])->name('f
 Route::get('/fastcert/resources/{id}', [ResourceController::class, 'show'])->name('fastcert.show');
 
 // For subscription page
+Route::middleware(['auth'])->group(function () {
 Route::get('/fastcert/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
 Route::get('/fastcert/subscribe/{id}', [SubscriptionController::class, 'subscribe'])->name('subscription.subscribe');
 Route::get('/fastcert/purchase/{id}/buy', [ResourceController::class, 'showPurchasePage'])->name('resources.buy');
@@ -43,6 +45,14 @@ Route::post('/fastcert/resources/{id}/purchase', [ResourceController::class, 'pr
 Route::post('/resources/{id}/cart', [ResourceController::class, 'addToCart'])->name('resources.addToCart');
 Route::get('/cart', [ResourceController::class, 'viewCart'])->name('cart.index');
 Route::post('/cart/remove/{id}', [ResourceController::class, 'removeFromCart'])->name('cart.remove');
+});
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+});
+
 
 
 

@@ -42,4 +42,24 @@ class UserResourceController extends Controller
         ], 200);
     }
 
+    public function getPurchasedResources(Request $request)
+    {
+        $user = $request->user(); // Get the authenticated user
+
+        $resources = Purchase::with('resource')
+            ->where('user_id', $user->id)
+            ->get()
+            ->map(function ($purchase) {
+                return [
+                    'id' => $purchase->resource->id,
+                    'title' => $purchase->resource->title,
+                    'description' => $purchase->resource->description,
+                    'price_paid' => $purchase->price_paid,
+                    'download_link' => url('/resources/' . $purchase->resource->id . '/download'),
+                ];
+            });
+
+        return response()->json($resources, 200);
+    }
+
 }

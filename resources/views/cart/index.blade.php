@@ -45,7 +45,7 @@
 
         <div class="flex justify-between items-center mt-4">
             <h2 class="text-xl font-bold">Total: ${{ number_format($total, 2) }}</h2>
-            <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded">Proceed to Checkout</a>
+            <a href="{{ route('checkout.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Proceed to Checkout</a>
         </div>
     @endif
 </div>

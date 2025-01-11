@@ -84,3 +84,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/purchases', [PurchaseController::class, 'list']); // List all purchases
     Route::get('/purchases/{id}', [PurchaseController::class, 'show']); // Show specific purchase
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/purchased-resources', [UserResourceController::class, 'getPurchasedResources']);
+    Route::get('/active-subscription', [UserSubscriptionController::class, 'getActiveSubscription']);
+    Route::put('/profile', [UserController::class, 'updateProfile']);
+});

@@ -18,6 +18,5 @@
 # GET http://127.0.0.1:8000/api/plans
 
 
-GET http://127.0.0.1:8000/api/purchases/{id}
-
+PUT http://127.0.0.1:8000/api/profile
 Authorization: Bearer <access_token>
