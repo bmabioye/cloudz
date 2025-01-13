@@ -35,25 +35,6 @@
 }
 
 
-/* Modal Styling */
-/* #mentorshipBookingModal .step-indicator {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 2px solid #ddd;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 28px;
-  font-weight: bold;
-  color: #555;
-}
-
-#mentorshipBookingModal .step-indicator.active {
-  border-color: #3490dc;
-  background-color: #3490dc;
-  color: #fff;
-} */
-
 /* Hidden class */
 .hidden {
   display: none;
@@ -73,27 +54,6 @@
   transition: all 0.5s ease-in-out;
 }
 
-/* .hidden {
-  display: none !important;
-} */
-
-/* .step-indicator {
-  width: 2rem;
-  height: 2rem;
-  line-height: 2rem;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  text-align: center;
-  font-weight: bold;
-  color: #ccc;
-  background: #fff;
-}
-
-.step-indicator.active {
-  border-color: #007bff;
-  color: #007bff;
-  background: #eaf4ff;
-} */
 
 .step-indicator-container {
   display: flex;
@@ -191,18 +151,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Individual day styling */
-/* .calendar-day {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-  border-radius: 4px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  cursor: pointer; 
-  transition: background-color 0.3s ease;
-} */
-
 .calendar-day:hover {
   background-color: #e3f2fd; /* Light blue on hover */
 }
@@ -240,8 +188,6 @@
     grid-template-columns: repeat(2, 1fr); /* Show 2 columns on very small screens */
   }
 }
-
-
 
 .calendar-day {
   display: flex;
@@ -307,22 +253,6 @@
   border: 2px solid #007bff;
   background-color: #d0ebff;
 }
-
-/* #selectedSlotsList {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 0;
-  list-style: none;
-}
-
-#selectedSlotsList li {
-  padding: 5px 10px;
-  border: 1px solid #007bff;
-  border-radius: 5px;
-  background-color: #e7f3ff;
-  font-size: 14px;
-} */
 
 /* Tooltip Styling */
 .slot:hover::after {
