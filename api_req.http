@@ -18,5 +18,12 @@
 # GET http://127.0.0.1:8000/api/plans
 
 
-PUT http://127.0.0.1:8000/api/profile
-Authorization: Bearer <access_token>
+# PUT http://127.0.0.1:8000/api/profile
+# Authorization: Bearer <access_token>
+
+
+# GET http://127.0.0.1:8000/api/purchased-resources
+# Headers: 
+# Authorization: Bearer <access_token>
+
+GET "http://localhost:8000/api/resources?search=&category_id=4&access=&sort=relevance" -H "Accept: application/json"

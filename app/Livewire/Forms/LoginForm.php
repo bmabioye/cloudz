@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use App\Models\User;
 
 class LoginForm extends Form
 {
@@ -26,7 +27,7 @@ class LoginForm extends Form
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
 
@@ -37,6 +38,7 @@ class LoginForm extends Form
                 'form.email' => trans('auth.failed'),
             ]);
         }
+
 
         RateLimiter::clear($this->throttleKey());
     }

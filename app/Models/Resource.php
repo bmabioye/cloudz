@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Resource extends Model
 {
     protected $fillable = [
-        'title', 'description', 'price', 'category_id', 'file_path', 'thumbnail', 'is_premium', 'status'
+        'title', 'description', 'type', 'price', 'category_id', 'file_path', 'is_free', 'thumbnail', 'preview_link', 'is_premium', 'status'
     ];
 
     public function category()

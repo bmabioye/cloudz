@@ -11,9 +11,13 @@ use App\Http\Controllers\AdminCategoryController;
 use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Api\UserResourceController;
-use App\Http\Controllers\Api\SubscriptionPlanController;
-use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ResourceController;
+
+
+Route::post('/stripe/create-payment-intent', [StripePaymentController::class, 'createPaymentIntent']);
+
+
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services
@@ -80,13 +84,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/subscriptions', [SubscriptionPlanController::class, 'list']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/purchases', [PurchaseController::class, 'list']); // List all purchases
-    Route::get('/purchases/{id}', [PurchaseController::class, 'show']); // Show specific purchase
-});
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/purchased-resources', [UserResourceController::class, 'getPurchasedResources']);
-    Route::get('/active-subscription', [UserSubscriptionController::class, 'getActiveSubscription']);
-    Route::put('/profile', [UserController::class, 'updateProfile']);
-});

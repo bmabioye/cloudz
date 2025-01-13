@@ -33,8 +33,8 @@
                             </svg>
                         </button>
                         <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
-                            <a href="{{ url('/fastcert-library') }}" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Library Overview</a>
-                            <a href="{{ url('/subscription-plans') }}" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Subscription Plans</a>
+                            <a href="{{ url('/fastcert') }}" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Library Overview</a>
+                            <a href="{{ url('/fastcert/subscription') }}" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Subscription Plans</a>
                         </div>
                     </div>
                     <div class="relative group">

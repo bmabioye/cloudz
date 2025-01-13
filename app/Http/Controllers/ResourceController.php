@@ -6,11 +6,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Resource;
 use App\Models\Category;
+use App\Models\Purchase;
 
 class ResourceController extends Controller
 {
 
-   
         public function index()
         {
 
@@ -166,5 +166,29 @@ class ResourceController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Resource removed from cart!');
     }
+
+    public function getPurchasedResources(Request $request)
+    {
+        $user = $request->user();
+    
+        $resources = Purchase::with('resource')
+            ->where('user_id', $user->id)
+            ->get()
+            ->map(function ($purchase) {
+                return [
+                    'resource_id' => $purchase->resource->id,
+                    'title' => $purchase->resource->title,
+                    'description' => $purchase->resource->description,
+                    'price_paid' => $purchase->price_paid,
+                    'download_link' => url('/resources/' . $purchase->resource->id . '/download'),
+                ];
+            });
+    
+        if ($resources->isEmpty()) {
+            return response()->json([], 200); // Return an empty array
+        }
+    
+        return response()->json($resources, 200);
+    }    
 
 }

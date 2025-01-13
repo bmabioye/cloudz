@@ -15,6 +15,9 @@ use App\Http\Controllers\AdminCouponController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\Api\SubscriptionPlanController;
+use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\UserController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -51,6 +54,18 @@ Route::post('/cart/remove/{id}', [ResourceController::class, 'removeFromCart'])-
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/purchases', [PurchaseController::class, 'list']); // List all purchases
+    Route::get('/purchases/{id}', [PurchaseController::class, 'show']); // Show specific purchase
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/purchased-resources', [ResourceController::class, 'getPurchasedResources']);
+    Route::get('/active-subscription', [SubscriptionController::class, 'getActiveSubscription']);
+    Route::put('/profile', [UserController::class, 'updateProfile']);
 });
 
 

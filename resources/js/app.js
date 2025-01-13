@@ -40,6 +40,13 @@ Alpine.store('theme', {
     },
 });
 
+// store the access_token
+document.addEventListener('livewire:load', () => {
+    Livewire.on('storeToken', (token) => {
+        localStorage.setItem('access_token', token);
+        console.log('Token stored successfully:', token);
+    });
+});
 
 
 // Add a global Alpine store for dark mode

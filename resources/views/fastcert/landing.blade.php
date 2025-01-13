@@ -56,7 +56,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Resource Item -->
                 <div class="bg-white shadow rounded-lg p-4">
-                    <img src="/path/to/image1.jpg" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
+                    <img src="/images/placeholder.png" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
                     <h3 class="text-lg font-bold">Resource Title 1</h3>
                     <p class="text-gray-600 text-sm">Brief description of the resource.</p>
                     <a href="#" class="block mt-4 text-blue-500 hover:underline">Learn More</a>
@@ -64,7 +64,7 @@
 
                 <!-- Resource Item -->
                 <div class="bg-white shadow rounded-lg p-4">
-                    <img src="/path/to/image2.jpg" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
+                    <img src="/images/placeholder.png" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
                     <h3 class="text-lg font-bold">Resource Title 2</h3>
                     <p class="text-gray-600 text-sm">Brief description of the resource.</p>
                     <a href="#" class="block mt-4 text-blue-500 hover:underline">Learn More</a>
@@ -72,7 +72,7 @@
 
                 <!-- Resource Item -->
                 <div class="bg-white shadow rounded-lg p-4">
-                    <img src="/path/to/image3.jpg" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
+                    <img src="/images/placeholder.png" alt="Resource" class="w-full h-40 object-cover rounded-md mb-4">
                     <h3 class="text-lg font-bold">Resource Title 3</h3>
                     <p class="text-gray-600 text-sm">Brief description of the resource.</p>
                     <a href="#" class="block mt-4 text-blue-500 hover:underline">Learn More</a>

@@ -35,4 +35,8 @@
         </form>
     </div>
 </div>
+<!-- Checkout Modal -->
+
+<script src="https://js.stripe.com/v3/"></script>
+
 @endsection

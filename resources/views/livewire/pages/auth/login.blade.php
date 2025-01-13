@@ -4,6 +4,7 @@ use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
+use App\Models\User;
 
 new #[Layout('layouts.guest')] class extends Component
 {
@@ -12,12 +13,13 @@ new #[Layout('layouts.guest')] class extends Component
     /**
      * Handle an incoming authentication request.
      */
-    public function login(): void
+    public function login()
     {
         $this->validate();
 
         $this->form->authenticate();
-
+        // $token = $user->createToken('API_TOKEN')->plainTextToken;
+        // return response()->json(['token' => $token]);
         Session::regenerate();
 
         $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
