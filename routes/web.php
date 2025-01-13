@@ -30,6 +30,14 @@ Route::view('/profile', 'profile')
     ->middleware('auth')
     ->name('profile');
 
+Route::view('/thank-you', 'thank-you')
+    ->middleware(['auth', 'verified'])
+    ->name('thank-you');
+
+Route::view('/checkout-failed', 'checkout-failed')
+    ->middleware(['auth', 'verified'])
+    ->name('checkout-failed');
+    
 Route::post('/logout', Logout::class)->name('logout');
 
 // CloudZone Custom Routes

@@ -16,6 +16,7 @@ use App\Http\Controllers\ResourceController;
 
 
 Route::post('/stripe/create-payment-intent', [StripePaymentController::class, 'createPaymentIntent']);
+Route::post('/stripe/handle-payment', [StripePaymentController::class, 'handlePayment']);
 
 
 
