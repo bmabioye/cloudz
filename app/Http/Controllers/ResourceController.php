@@ -176,11 +176,12 @@ class ResourceController extends Controller
             ->get()
             ->map(function ($purchase) {
                 return [
-                    'resource_id' => $purchase->resource->id,
+                    'id' => $purchase->resource->id,
                     'title' => $purchase->resource->title,
                     'description' => $purchase->resource->description,
-                    'price_paid' => $purchase->price_paid,
+                    'price' => $purchase->price_paid,
                     'download_link' => url('/resources/' . $purchase->resource->id . '/download'),
+                    'invoice_path' => $purchase->invoice_path,
                 ];
             });
     

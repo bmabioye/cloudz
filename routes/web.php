@@ -18,6 +18,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Api\SubscriptionPlanController;
 use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -161,6 +162,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::delete('/coupons/{coupon}', [AdminCouponController::class, 'destroy'])->name('coupons.destroy');
 });
 
+Route::get('/invoice/{id}/download', [InvoiceController::class, 'download']);
 
 // Include authentication routes from Breeze
 require __DIR__ . '/auth.php';

@@ -47,18 +47,20 @@ class SubscriptionController extends Controller
     public function getActiveSubscription(Request $request)
     {
 
-        if (!auth()->check()) {
-            \Log::info('User is not authenticated.');
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
+        // if (!auth()->check()) {
+        //     \Log::info('User is not authenticated.');
+        //     return response()->json(['message' => 'Unauthorized'], 401);
+        // }
         
-        \Log::info('Authenticated user:', ['user_id' => auth()->id()]);
+        // \Log::info('Authenticated user:', ['user_id' => auth()->id()]);
         
-        //$user = $request->user(); // Get the authenticated user
-        $user = auth('sanctum')->user();
+        $user = $request->user(); // Get the authenticated user
+        // $user = auth('sanctum')->user();
         // Fetch active subscription (assuming the `subscriptions` table has a 'status' column for 'active')
         $subscription = $user->subscriptions()
+            ->with('plan')
             ->where('status', 'active')
+            ->where(user_id, auth()->id())
             ->first();
     
         // Return subscription details or null if no active subscription
