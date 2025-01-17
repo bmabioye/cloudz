@@ -19,6 +19,9 @@ use App\Http\Controllers\Api\SubscriptionPlanController;
 use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\ConsultingController;
+use App\Http\Controllers\QuoteController;
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -45,8 +48,10 @@ Route::post('/logout', Logout::class)->name('logout');
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/fastcert', [HomeController::class, 'fastcert'])->name('fastcert.landing');
 Route::get('/fastcert/resources', [ResourceController::class, 'index'])->name('fastcert.resources');
+
 // For resource details
 Route::get('/fastcert/resources/{id}', [ResourceController::class, 'show'])->name('fastcert.show');
+
 
 // For subscription page
 Route::middleware(['auth'])->group(function () {
@@ -58,12 +63,17 @@ Route::post('/resources/{id}/cart', [ResourceController::class, 'addToCart'])->n
 Route::get('/cart', [ResourceController::class, 'viewCart'])->name('cart.index');
 Route::post('/cart/remove/{id}', [ResourceController::class, 'removeFromCart'])->name('cart.remove');
 });
+Route::get('/api/cart-count', [ResourceController::class, 'getCartCount']);
 
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
 });
+
+// Route::post('webhook/stripe', [WebhookController::class, 'handleStripe']);
+// Route::post('webhook/paystack', [WebhookController::class, 'handlePaystack']);
+
 
 
 Route::middleware('auth')->group(function () {
@@ -77,7 +87,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [UserController::class, 'updateProfile']);
 });
 
-
+// Consulting section
+Route::get('/consulting', [ConsultingController::class, 'index'])->name('consulting.index');
+Route::post('/customized-quote', [QuoteController::class, 'store'])->name('customized.quote');
 
 
 Route::get('/mentorship/booking', [MentorshipController::class, 'showBookingForm'])->name('mentorship.booking');

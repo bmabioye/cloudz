@@ -3,7 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 use Livewire\Volt\Volt;
+use App\Events\PurchaseSuccessful;
+use App\Listeners\ProcessPurchaseSuccessful;
 
 class VoltServiceProvider extends ServiceProvider
 {
@@ -24,5 +27,10 @@ class VoltServiceProvider extends ServiceProvider
             config('livewire.view_path', resource_path('views/livewire')),
             resource_path('views/pages'),
         ]);
+
+        Event::listen(
+            PurchaseSuccessful::class,
+            [ProcessPurchaseSuccessful::class, 'handle']
+        );
     }
 }

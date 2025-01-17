@@ -13,10 +13,15 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Api\UserResourceController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\ResourceController;
+use App\Http\Controllers\CheckoutController;
+use App\Services\Payments\StripePaymentService;
+use App\Http\Controllers\WebhookController;
+use App\Http\Controllers\Api\SubscriptionPlanController;
 
 
-Route::post('/stripe/create-payment-intent', [StripePaymentController::class, 'createPaymentIntent']);
-Route::post('/stripe/handle-payment', [StripePaymentController::class, 'handlePayment']);
+Route::post('/stripe/create-payment-intent', [CheckoutController::class, 'createPaymentIntent']);
+// Route::post('/stripe/handle-payment', [CheckoutController::class, 'handlePaymentStripe']);
+Route::post('/stripe/handle-payment', [WebhookController::class, 'handleStripe']);
 
 
 

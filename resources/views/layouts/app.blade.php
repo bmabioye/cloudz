@@ -19,10 +19,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=raleway:400,500,600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.8/dayjs.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-
 
 
     <!-- Styles -->
@@ -31,35 +28,6 @@
 </head>
 
 <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-<!-- <header class="flex justify-between items-center py-4 px-6 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow">
-    <h1 class="text-xl font-bold">CloudZone</h1>
-
-    <div x-data="{ darkMode: $store.theme.darkMode }">
-    <label for="theme-toggle" class="flex items-center cursor-pointer">
-        <div class="relative">
-            <input
-                id="theme-toggle"
-                type="checkbox"
-                class="sr-only"
-                :checked="$store.theme.darkMode"
-                x-on:click="$store.theme.toggle()"
-            >
-            <div 
-                class="block w-10 h-6 rounded-full transition duration-300"
-                :class="$store.theme.darkMode ? 'bg-gray-700' : 'bg-gray-400'"
-            ></div>
-            <div 
-                class="dot absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition transform duration-300"
-                :class="$store.theme.darkMode ? 'translate-x-4' : ''"
-            ></div>
-        </div>
-        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-100">
-            Switch Theme
-        </span>
-    </label>
-    </div>
-
-</header> -->
 
     <div class="min-h-screen">
         <!-- Navigation -->

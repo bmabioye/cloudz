@@ -124,27 +124,31 @@ class ResourceController extends Controller
     public function addToCart(Request $request, $id)
     {
         $resource = Resource::findOrFail($id);
-
+    
         // Retrieve the cart from the session or create a new one
         $cart = session()->get('cart', []);
-
+    
         // Check if the resource is already in the cart
         if (isset($cart[$id])) {
             return redirect()->back()->with('info', 'This resource is already in your cart.');
         }
-
+    
         // Add the resource to the cart
         $cart[$id] = [
             'title' => $resource->title,
             'price' => $resource->price,
             'is_premium' => $resource->is_premium,
         ];
-
+    
         // Save the cart back to the session
         session()->put('cart', $cart);
-
+    
+        // Update cart count in session
+        session()->put('cart_count', count($cart));
+    
         return redirect()->route('cart.index')->with('success', 'Resource added to cart successfully!');
     }
+    
 
     public function viewCart()
     {
@@ -158,14 +162,32 @@ class ResourceController extends Controller
     public function removeFromCart($id)
     {
         $cart = session()->get('cart', []);
-
+    
         if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
+    
+            // Update cart count in session
+            session()->put('cart_count', count($cart));
         }
-
+    
         return redirect()->route('cart.index')->with('success', 'Resource removed from cart!');
     }
+    
+
+    public function getCartCount()
+    {
+        $cart = session()->get('cart', []);
+
+        return response()->json(['count' => count($cart)]);
+    }
+    
+    public function clearCart()
+    {
+        session()->forget('cart');
+        return response()->json(['success' => true]);
+    }
+
 
     public function getPurchasedResources(Request $request)
     {

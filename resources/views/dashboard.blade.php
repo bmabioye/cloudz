@@ -91,7 +91,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const purchasedResourcesContainer = document.getElementById("purchased-resources");
-    const subscriptionDetailsContainer = document.getElementById("subscription-details");
+    const subscriptionDetailsContainer = document.getElementById("subscriptions-section");
 
     async function getSanctumCsrfCookie() {
         try {

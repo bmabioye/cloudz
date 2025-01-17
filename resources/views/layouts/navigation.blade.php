@@ -1,3 +1,4 @@
+@include('layouts.quotemodal')
 <nav 
      :class="darkMode ? 'bg-gray-900 text-gray-100' : 'bg-blue-800 text-white'"
     class="sticky top-0 z-50 shadow-md transition-colors duration-300"
@@ -85,6 +86,34 @@
                             <a href="/login" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Login</a>
                         </div>
                     </div>
+                            <!-- Cart Icon with Badge -->
+                    <div class="relative">
+                        <button id="cart-button" class="relative flex items-center">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                class="w-6 h-6 text-white-700 hover:text-gray-200"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M3 3h18l-2 14H5L3 3zM8 21a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm13 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"
+                                />
+                            </svg>
+                            <!-- Badge -->
+                             <a href="{{ route('cart.index') }}">
+                            <span
+                                id="cart-badge"
+                                class="absolute -top-1 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5 hidden"
+                            >
+                            {{ session('cart_count', 0) }}
+                            </span>
+                            </a>
+                        </button>
+                    </div>
                     <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Get a Quote</a>
                     <div>
                         <input id="theme-toggle" type="checkbox" class="sr-only" x-model="darkMode">
@@ -132,7 +161,7 @@
                         <a href="/login" class="block px-3 py-2 hover:bg-gray-700">Login</a>
                     </div>
                 </div>
-                <a href="#" class="block bg-blue-500 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-600">Get a Quote</a>
+                <a href="javascript:void(0);" onclick="openModal()" class="block bg-blue-500 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-600">Get a Quote</a>
             </div>
         </div>
     </div>

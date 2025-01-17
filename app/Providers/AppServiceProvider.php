@@ -15,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(PaymentGatewayInterface::class, function ($app) {
+            $gateway = request()->input('gateway', 'stripe');
+            return PaymentServiceFactory::create($gateway);
+        });
     }
 
     /**
@@ -23,12 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-              // Register the middleware alias
-              Route::aliasMiddleware('is_admin', AdminMiddleware::class);
-              DB::listen(function ($query) {
-                Log::info($query->sql);
-                Log::info($query->bindings);
-                Log::info($query->time);
-            });
-    }
+        // Register a middleware alias
+        Route::aliasMiddleware('is_admin', AdminMiddleware::class);
+    
+        // Log all queries (helpful for debugging)
+        DB::listen(function ($query) {
+            Log::info($query->sql);
+            Log::info($query->bindings);
+            Log::info($query->time);
+        });
+    }    
 }
