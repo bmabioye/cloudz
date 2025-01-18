@@ -80,10 +80,22 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-                        <div class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
-                            <a href="/dashboard" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Dashboard</a>
-                            <a href="/profile" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Profile</a>
-                            <a href="/login" class="block px-4 py-2 hover:bg-gray-200 dark:hover:bg-gray-700">Login</a>
+                        <div id="accountMenu" class="absolute hidden group-hover:block bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-100 mt-2 py-2 rounded shadow-lg">
+                                <ul>
+                            @auth
+                                <li><a href="/dashboard" class="block px-4 py-2 hover:bg-gray-100">Dashboard</a></li>
+                                <li><a href="/profile" class="block px-4 py-2 hover:bg-gray-100">Profile</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="block px-4 py-2 text-left w-full hover:bg-gray-100">Logout</button>
+                                    </form>
+                                </li>
+                            @else
+                                <li><a href="/login" class="block px-4 py-2 hover:bg-gray-100">Login</a></li>
+                                <li><a href="/register" class="block px-4 py-2 hover:bg-gray-100">Register</a></li>
+                            @endauth
+                        </ul>
                         </div>
                     </div>
                             <!-- Cart Icon with Badge -->
@@ -114,7 +126,7 @@
                             </a>
                         </button>
                     </div>
-                    <a href="#" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Get a Quote</a>
+                    <a href="javascript:void(0);" onclick="openQModal()" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Get a Quote</a>
                     <div>
                         <input id="theme-toggle" type="checkbox" class="sr-only" x-model="darkMode">
                         <label for="theme-toggle" class="flex items-center cursor-pointer">
@@ -161,7 +173,7 @@
                         <a href="/login" class="block px-3 py-2 hover:bg-gray-700">Login</a>
                     </div>
                 </div>
-                <a href="javascript:void(0);" onclick="openModal()" class="block bg-blue-500 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-600">Get a Quote</a>
+                <a href="javascript:void(0);" onclick="openQModal()" class="block bg-blue-500 text-white px-3 py-2 rounded-md text-base font-medium hover:bg-blue-600">Get a Quote</a>
             </div>
         </div>
     </div>

@@ -48,7 +48,7 @@
             </a>
 
             <!-- Certification Study Packs -->
-            <a href="/services/certification-study-packs" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
+            <a href="/fastcert/resources" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                 <i class="fas fa-book text-pink-500 dark:text-pink-300 text-4xl mb-4"></i>
                 <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-pink-500 dark:group-hover:text-pink-300">Certification Study Packs</h3>
                 <p class="text-gray-600 dark:text-gray-400">Get resources to excel in your certification exams.</p>

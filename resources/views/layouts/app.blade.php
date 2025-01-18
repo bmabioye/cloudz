@@ -31,6 +31,7 @@
 
     <div class="min-h-screen">
         <!-- Navigation -->
+        @include('layouts.quotemodal')
         @include('layouts.navigation')
 
         <!-- Page Heading -->

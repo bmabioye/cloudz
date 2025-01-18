@@ -17,13 +17,14 @@ use App\Http\Controllers\CheckoutController;
 use App\Services\Payments\StripePaymentService;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\Api\SubscriptionPlanController;
+use App\Http\Controllers\QuoteController;
 
 
 Route::post('/stripe/create-payment-intent', [CheckoutController::class, 'createPaymentIntent']);
 // Route::post('/stripe/handle-payment', [CheckoutController::class, 'handlePaymentStripe']);
 Route::post('/stripe/handle-payment', [WebhookController::class, 'handleStripe']);
 
-
+Route::post('/submitquote', [QuoteController::class, 'store']);
 
 Route::prefix('bookings')->group(function () {
     Route::get('/', [BookingController::class, 'index']); // List mentorship services

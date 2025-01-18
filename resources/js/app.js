@@ -248,7 +248,10 @@ function accessResource(resourceId) {
     });
 }
 
-
+document.getElementById('accountDropdown').addEventListener('click', () => {
+    const menu = document.getElementById('accountMenu');
+    menu.classList.toggle('hidden');
+});
 
 
 

@@ -21,7 +21,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\ConsultingController;
-use App\Http\Controllers\QuoteController;
+
 
 // Default Breeze Routes
 Route::view('/', 'welcome')->name('welcome');
@@ -42,6 +42,12 @@ Route::view('/checkout-failed', 'checkout-failed')
     ->middleware(['auth', 'verified'])
     ->name('checkout-failed');
     
+Route::get('/contact', function () {
+        return view('contact');
+    })->name('contact');
+    
+Route::post('/contact', [HomeController::class, 'contact'])->name('home.contact');
+
 Route::post('/logout', Logout::class)->name('logout');
 
 // CloudZone Custom Routes
@@ -89,7 +95,7 @@ Route::middleware('auth')->group(function () {
 
 // Consulting section
 Route::get('/consulting', [ConsultingController::class, 'index'])->name('consulting.index');
-Route::post('/customized-quote', [QuoteController::class, 'store'])->name('customized.quote');
+
 
 
 Route::get('/mentorship/booking', [MentorshipController::class, 'showBookingForm'])->name('mentorship.booking');
