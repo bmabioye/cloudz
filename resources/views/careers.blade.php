@@ -16,7 +16,6 @@
             <a href="#open-positions" class="mt-6 inline-block bg-white text-blue-700 px-6 py-3 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition">Explore Opportunities</a>
         </div>
     </section>
-
     <!-- Why Work With Us Section -->
     <section class="py-12 bg-gray-100 dark:bg-gray-800">
         <div class="container mx-auto px-4">
@@ -46,7 +45,6 @@
             </div>
         </div>
     </section>
-
     <!-- Open Positions Section -->
     <section id="open-positions" class="py-12">
         <div class="container mx-auto px-4">
@@ -87,7 +85,6 @@
             </div>
         </div>
     </section>
-
     <!-- Call to Action Section -->
     <section class="py-12 text-center bg-blue-700 text-white">
         <div class="container mx-auto px-4">
@@ -149,7 +146,6 @@
         </div>
     </div>
 </div>
-
  <script>
     function toggleModal() {
         const modal = document.getElementById('applicationFormModal');
@@ -172,8 +168,6 @@
             }, 5000); // Adjust the duration here (5000ms = 5 seconds)
         }
     });
-
-
 </script>
 
 @endsection

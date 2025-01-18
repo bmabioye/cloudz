@@ -54,23 +54,43 @@
         </a>
     </section>
 
-    <!-- Mentorship Services -->
-    <section id="services" class="mt-16">
-        <h2 class="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-10">
-            Available Mentorship Services
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 lg:px-8">
-            @foreach($services as $service)
-            <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ $service->type}}</h3>
-                <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $service->description }}</p>
-                <a href="{{ route('mentorship.book', $service->id) }}" class="mt-4 block bg-blue-500 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600">
-                    Book a Session
-                </a>
+<!-- Mentorship Services -->
+<section id="services" class="mt-16">
+    <h2 class="text-center text-3xl font-semibold text-gray-800 dark:text-gray-100 mb-10">
+        Available Mentorship Services
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4 lg:px-8">
+        @foreach($services as $service)
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg relative group">
+            <!-- Image with hover effect -->
+            <div class="relative overflow-hidden rounded-md">
+                <img 
+                    src="{{ asset($service->image) }}" 
+                    alt="{{ $service->type }}" 
+                    class="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-105"
+                />
+                <!-- "Live" label -->
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span class="text-white text-lg font-bold uppercase">Live</span>
+                </div>
             </div>
-            @endforeach
+            <!-- Service details -->
+            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mt-4">
+                {{ $service->type }}
+            </h3>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">
+                {{ $service->description }}
+            </p>
+            <a href="{{ route('mentorship.book', $service->id) }}" 
+               class="mt-4 block bg-blue-500 text-white py-2 px-4 rounded-lg text-center hover:bg-blue-600">
+                Book a Session
+            </a>
         </div>
-    </section>
+        @endforeach
+    </div>
+</section>
+
+
 
     <!-- How It Works -->
     <section class="mt-16 bg-gray-200 dark:bg-gray-800 py-12">

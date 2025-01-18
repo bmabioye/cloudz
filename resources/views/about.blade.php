@@ -72,19 +72,19 @@
                 <!-- Leader 1 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
                     <img src="/images/leader1.jpg" alt="Leader 1" class="w-24 h-24 mx-auto rounded-full mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">John Doe</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Babatunde Abioye</h3>
                     <p class="text-gray-700 dark:text-gray-300">Founder & CEO</p>
                 </div>
                 <!-- Leader 2 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
                     <img src="/images/leader2.jpg" alt="Leader 2" class="w-24 h-24 mx-auto rounded-full mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Jane Smith</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Afaq Mandi</h3>
                     <p class="text-gray-700 dark:text-gray-300">CTO</p>
                 </div>
                 <!-- Leader 3 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
                     <img src="/images/leader3.jpg" alt="Leader 3" class="w-24 h-24 mx-auto rounded-full mb-4">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Ali Khan</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Sarah Karim</h3>
                     <p class="text-gray-700 dark:text-gray-300">Head of Operations</p>
                 </div>
             </div>

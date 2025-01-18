@@ -1,12 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 py-16">
-        <div class="max-w-7xl mx-auto text-center">
-            <h1 class="text-4xl font-bold mb-4">Welcome to CloudZone</h1>
-            <p class="text-lg">CloudZone IT empowers your journey with expert consulting and tailored mentorship.</p>
+<section class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-20">
+    <div class="container mx-auto text-center animate-fade-in">
+        <h1 class="text-4xl font-bold">
+            Empower Your Career with <span class="text-yellow-400">CloudZone IT</span>
+        </h1>
+        <p class="text-lg mt-4">
+            Transform your potential with expert consulting, certifications, and tailored mentorship.
+        </p>
+        <div class="mt-6">
+            <a href="/services" 
+               class="bg-yellow-400 text-blue-900 py-3 px-6 rounded-lg shadow-md hover:bg-yellow-500">
+               Explore Services
+            </a>
+            <a href="/about" 
+               class="ml-4 bg-white text-blue-900 py-3 px-6 rounded-lg shadow-md hover:bg-gray-100">
+               Learn More
+            </a>
         </div>
-    </section>
+        <!-- <div class="mt-8">
+            <video autoplay muted loop class="w-full h-64 rounded-md shadow-lg">
+                <source src="/videos/cloudzone_intro.mp4" type="video/mp4">
+            </video>
+        </div> -->
+    </div>
+    
+</section>
+
 
     <section class="py-12 bg-gray-100 dark:bg-gray-900">
     <div class="container mx-auto px-4">
@@ -91,22 +112,6 @@
     </div>
   </div>
 </section>
-
-
-
-
-
-<!-- <section class="bg-blue-600 dark:bg-blue-900 py-12">
-  <div class="max-w-7xl mx-auto text-center text-white">
-    <h2 class="text-3xl font-extrabold">Ready to Take the Next Step?</h2>
-    <p class="mt-4">Join the thousands of professionals who trust CloudZone for their career and business growth.</p>
-    <div class="mt-6 flex justify-center space-x-4">
-      <a href="/get-started" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100">Get Started</a>
-      <a href="/contact" class="bg-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-blue-700">Contact Us</a>
-    </div>
-  </div>
-</section> -->
-
 <section class="bg-blue-600 dark:bg-blue-900 py-12">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 class="text-3xl font-extrabold text-white">Take the Leap with CloudZone</h2>
@@ -119,7 +124,7 @@
   </div>
 </section>
 
-<section class="py-16">
+<section class="py-16 ">
   <div class="text-center mb-8">
     <h2 class="text-3xl font-bold">Why Choose CloudZone?</h2>
   </div>
@@ -210,7 +215,7 @@
 <div class="bg-gray-100 dark:bg-gray-800 py-12">
     <div class="container mx-auto px-4">
         <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Frequently Asked Questions</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div data-aos="fade-up" class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Question 1 -->
             <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">What industries do you cater to?</h3>
@@ -219,35 +224,35 @@
                 </p>
             </div>
             <!-- Question 2 -->
-            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div data-aos="fade-up" class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">How do I request a consultation or service?</h3>
                 <p class="text-gray-700 dark:text-gray-300">
                     You can request a consultation by using the "Request a Quote" or "Contact Us" buttons available on each service page.
                 </p>
             </div>
             <!-- Question 3 -->
-            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div data-aos="fade-up" class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Do you offer customized solutions?</h3>
                 <p class="text-gray-700 dark:text-gray-300">
                     Yes, all our services are customizable to meet the unique requirements of your business and industry.
                 </p>
             </div>
             <!-- Question 4 -->
-            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div data-aos="fade-up" class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">What training programs do you provide?</h3>
                 <p class="text-gray-700 dark:text-gray-300">
                     We offer training in cloud platforms, cybersecurity, project management, and other high-demand areas. Custom training is also available.
                 </p>
             </div>
             <!-- Question 5 -->
-            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div data-aos="fade-up" class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Do you assist with regulatory compliance?</h3>
                 <p class="text-gray-700 dark:text-gray-300">
                     Absolutely. Our GRC services help ensure compliance with local and international regulations such as GDPR, ISO 27001, and NESA.
                 </p>
             </div>
             <!-- Question 6 -->
-            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+            <div data-aos="fade-up" class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
                 <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">How can I get IT support in case of emergencies?</h3>
                 <p class="text-gray-700 dark:text-gray-300">
                     We offer ad-hoc IT support services to address emergencies. Reach out through our support hotline or request assistance online.
