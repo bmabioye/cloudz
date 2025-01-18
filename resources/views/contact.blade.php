@@ -58,7 +58,7 @@
                     <textarea name="message" id="message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200 focus:ring-blue-500 focus:border-blue-500"></textarea>
                 </div>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                    By submitting this form, you agree to the processing of the submitted personal data in accordance with our <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>.
+                    By submitting this form, you agree to the processing of the submitted personal data in accordance with our <a href="/privacy" class="text-blue-600 dark:text-blue-400 hover:underline">Privacy Policy</a>.
                 </p>
                 <button type="submit" class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Submit

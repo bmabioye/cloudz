@@ -21,6 +21,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\ConsultingController;
+use App\Http\Controllers\CareerApplicationController;
 
 
 // Default Breeze Routes
@@ -46,6 +47,22 @@ Route::get('/contact', function () {
         return view('contact');
     })->name('contact');
     
+Route::get('/about', function () {
+        return view('about');
+    })->name('about');
+
+Route::get('/privacy', function () {
+        return view('privacy');
+    })->name('privacy');
+
+Route::get('/terms', function () {
+        return view('terms');
+    })->name('terms');
+
+Route::get('/careers', function () {
+        return view('careers');
+    })->name('careers');
+
 Route::post('/contact', [HomeController::class, 'contact'])->name('home.contact');
 
 Route::post('/logout', Logout::class)->name('logout');
@@ -81,6 +98,8 @@ Route::middleware(['auth'])->group(function () {
 // Route::post('webhook/paystack', [WebhookController::class, 'handlePaystack']);
 
 
+Route::post('/careers/apply', [CareerApplicationController::class, 'store'])->name('careers.apply');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/purchases', [PurchaseController::class, 'list']); // List all purchases
@@ -105,14 +124,17 @@ Route::get('/mentorship/{id}/book', [BookingController::class, 'book'])->name('m
 Route::post('/mentorship', [BookingController::class, 'store']); // Create booking
 
 Route::prefix('services')->group(function () {
+    Route::get('/', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/cloud-solutions', [ServiceController::class, 'cloudSolutions'])->name('services.cloud-solutions');
     Route::get('/cybersecurity', [ServiceController::class, 'cybersecurity'])->name('services.cybersecurity');
     Route::get('/grc', [ServiceController::class, 'grc'])->name('services.grc');
-    Route::get('/one-on-one-coaching', [ServiceController::class, 'coaching'])->name('services.coaching');
-    Route::get('/webinars-workshops', [ServiceController::class, 'webinars'])->name('services.webinars');
-    Route::get('/certification-study-packs', [ServiceController::class, 'studyPacks'])->name('services.study-packs');
-    Route::get('/ebooks', [ServiceController::class, 'ebooks'])->name('services.ebooks');
-    Route::get('/subscription-plans', [ServiceController::class, 'subscriptions'])->name('services.subscription-plans');
+    Route::get('/modernization', [ServiceController::class, 'modernization'])->name('services.modernization');
+    Route::get('/digital-transformation', [ServiceController::class, 'digitization'])->name('services.digital-transformation');
+    Route::get('/industry-solutions', [ServiceController::class, 'industrysolutions'])->name('services.industry-solutions');
+    Route::get('/managed-services', [ServiceController::class, 'managedservices'])->name('services.mnaaged-services');
+    Route::get('/ai-analytics', [ServiceController::class, 'analytics'])->name('services.ai-analytics');
+    Route::get('/staffing', [ServiceController::class, 'staffing'])->name('services.staffing');
+    Route::get('/training-certifications', [ServiceController::class, 'training'])->name('services.training-certifications');
 });
 
 // Admin Routes

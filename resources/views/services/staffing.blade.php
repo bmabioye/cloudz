@@ -1,26 +1,26 @@
-<!-- resources/views/cybersecurity-services.blade.php -->
+<!-- resources/views/it-staffing-ad-hoc-support.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
 <div class="bg-gray-50 dark:bg-gray-900">
     <!-- Hero Section -->
-    <section class="text-center py-16 bg-red-600 text-white">
+    <section class="text-center py-16 bg-teal-600 text-white">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl font-bold mb-4">Safeguard Your Digital Assets</h1>
+            <h1 class="text-4xl font-bold mb-4">Bridge the IT Skills Gap</h1>
             <p class="text-lg">
-                Comprehensive cybersecurity solutions tailored to protect businesses in the MEA region.
+                Providing MEA businesses with skilled IT professionals for projects, temporary needs, or long-term growth.
             </p>
-            <a href="#get-quote" class="mt-6 inline-block bg-white text-red-600 px-6 py-3 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition">Schedule a Security Assessment</a>
+            <a href="#get-quote" class="mt-6 inline-block bg-white text-teal-600 px-6 py-3 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition">Request Staffing Support</a>
         </div>
     </section>
 
     <!-- Introduction Section -->
     <section class="py-12 bg-gray-100 dark:bg-gray-800">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">Proactive Cybersecurity for MEA Businesses</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">On-Demand IT Talent, When You Need It</h2>
             <p class="text-center text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-                With increasing cyber threats targeting financial, healthcare, and energy sectors, our services ensure that your business stays ahead of potential risks while meeting local and international compliance requirements.
+                Addressing the IT skills gap in the MEA region, we provide reliable staffing solutions to support your business goals, whether you need project-specific expertise or long-term team augmentation.
             </p>
         </div>
     </section>
@@ -28,38 +28,38 @@
     <!-- Core Offerings Section -->
     <section class="py-12">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Our Cybersecurity Services</h2>
+            <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Our IT Staffing Solutions</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Offering 1 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center transition transform hover:scale-105">
-                    <i class="fas fa-shield-alt text-4xl text-red-600 dark:text-red-400 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Security Assessments</h3>
+                    <i class="fas fa-users text-4xl text-teal-600 dark:text-teal-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Staff Augmentation</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Identify vulnerabilities with in-depth security evaluations and penetration testing.
+                        Scale your team with skilled IT professionals for short-term or long-term projects.
                     </p>
                 </div>
                 <!-- Offering 2 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center transition transform hover:scale-105">
-                    <i class="fas fa-user-shield text-4xl text-red-600 dark:text-red-400 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Managed Security Services</h3>
+                    <i class="fas fa-laptop-house text-4xl text-teal-600 dark:text-teal-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Project-Specific Staffing</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Continuous monitoring and management of your IT environment to prevent threats.
+                        Hire experts for cloud, cybersecurity, or digital transformation initiatives.
                     </p>
                 </div>
                 <!-- Offering 3 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center transition transform hover:scale-105">
-                    <i class="fas fa-laptop-code text-4xl text-red-600 dark:text-red-400 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Incident Response</h3>
+                    <i class="fas fa-user-clock text-4xl text-teal-600 dark:text-teal-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Temporary IT Support</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Swift and effective responses to minimize the impact of cybersecurity incidents.
+                        Access on-demand IT support for emergencies or short-term needs.
                     </p>
                 </div>
                 <!-- Offering 4 -->
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center transition transform hover:scale-105">
-                    <i class="fas fa-file-signature text-4xl text-red-600 dark:text-red-400 mb-4"></i>
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Compliance Consulting</h3>
+                    <i class="fas fa-headset text-4xl text-teal-600 dark:text-teal-400 mb-4"></i>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Managed IT Services</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Guidance on GDPR, ISO 27001, and NESA compliance to meet regulatory requirements.
+                        Ensure smooth operations with ongoing remote IT management and support.
                     </p>
                 </div>
             </div>
@@ -72,21 +72,21 @@
             <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Real-World Use Cases</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Financial Institutions</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Cloud Projects</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Conducting security assessments to protect sensitive customer data from cyber threats.
+                        Providing cloud architects for successful migrations and hybrid solutions.
                     </p>
                 </div>
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Healthcare</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Cybersecurity Initiatives</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Ensuring compliance with GDPR and securing electronic health records (EHRs).
+                        Deploying cybersecurity analysts for incident response and compliance projects.
                     </p>
                 </div>
                 <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Oil and Gas</h3>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">IT Support</h3>
                     <p class="text-gray-700 dark:text-gray-300">
-                        Protecting SCADA systems and other critical infrastructure from cyberattacks.
+                        Delivering remote support for SMEs needing helpdesk services.
                     </p>
                 </div>
             </div>
@@ -101,15 +101,15 @@
                 <div class="swiper-wrapper">
                     <div class="swiper-slide bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
                         <p class="text-gray-700 dark:text-gray-300 italic mb-4">
-                            "Their incident response team minimized our downtime after a ransomware attack."
+                            "Their staff augmentation helped us meet tight deadlines for our cloud migration project."
                         </p>
-                        <span class="text-gray-800 dark:text-gray-100 font-bold">– Ahmed M., Banking Executive</span>
+                        <span class="text-gray-800 dark:text-gray-100 font-bold">– Sarah L., IT Manager</span>
                     </div>
                     <div class="swiper-slide bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg text-center">
                         <p class="text-gray-700 dark:text-gray-300 italic mb-4">
-                            "CloudZone's compliance consulting ensured our GDPR readiness with ease."
+                            "Their temporary IT support ensured business continuity during a critical outage."
                         </p>
-                        <span class="text-gray-800 dark:text-gray-100 font-bold">– Sarah A., Healthcare CIO</span>
+                        <span class="text-gray-800 dark:text-gray-100 font-bold">– Ahmed M., Operations Lead</span>
                     </div>
                 </div>
             </div>
@@ -117,14 +117,14 @@
     </section>
 
     <!-- Call to Action Section -->
-    <section id="get-quote" class="py-12 text-center bg-red-600 text-white">
+    <section id="get-quote" class="py-12 text-center bg-teal-600 text-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-4">Secure Your Business Today</h2>
+            <h2 class="text-3xl font-bold mb-4">Find the Right Talent for Your IT Needs</h2>
             <p class="mb-6">
-                Take the first step in protecting your business from cyber threats. Contact us for a security consultation.
+                Contact us today to learn how we can support your IT staffing and ad-hoc requirements.
             </p>
-            <a href="#quoteModal" data-bs-toggle="modal" class="inline-block bg-white text-red-600 px-6 py-3 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition">
-                Request a Security Assessment
+            <a href="#quoteModal" data-bs-toggle="modal" class="inline-block bg-white text-teal-600 px-6 py-3 font-bold rounded-lg shadow-lg hover:bg-gray-100 transition">
+                Request Staffing Support
             </a>
         </div>
     </section>

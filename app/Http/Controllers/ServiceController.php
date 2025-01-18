@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
+    public function index()
+    {
+        return view('services.index');
+    }
+
     public function cloudSolutions()
     {
         return view('services.cloud-solutions');
@@ -21,14 +26,14 @@ class ServiceController extends Controller
         return view('services.grc');
     }
 
-    public function coaching()
+    public function modernization()
     {
-        return view('services.one-on-one-coaching');
+        return view('services.modernization');
     }
 
-    public function webinars()
+    public function digitization()
     {
-        return view('services.webinars-workshops');
+        return view('services.digital-transformation');
     }
 
     public function studyPacks()
@@ -36,14 +41,29 @@ class ServiceController extends Controller
         return view('services.certification-study-packs');
     }
 
-    public function ebooks()
+    public function managedservices()
     {
-        return view('services.ebooks');
+        return view('services.managed-services');
     }
 
-    public function subscriptions()
+    public function industrysolutions()
     {
-        return view('services.subscription-plans');
+        return view('services.industry-solutions');
+    }
+
+    public function analytics()
+    {
+        return view('services.ai-analytics');
     }
     
+    public function staffing()
+    {
+        return view('services.staffing');
+    }
+
+    public function training()
+    {
+        return view('services.training-certifications');
+    }
+
 }

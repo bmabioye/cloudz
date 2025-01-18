@@ -29,7 +29,7 @@
             <!-- One-on-One Coaching -->
             <a href="/mentorship/booking" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                 <i class="fas fa-user-graduate text-green-500 dark:text-green-300 text-4xl mb-4"></i>
-                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-green-500 dark:group-hover:text-green-300">One-on-One Coaching</h3>
+                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-green-500 dark:group-hover:text-green-300">Mentorship & Coaching</h3>
                 <p class="text-gray-600 dark:text-gray-400">Achieve your career goals with personalized mentorship.</p>
             </a>
 
@@ -41,16 +41,16 @@
             </a>
 
             <!-- Webinars & Workshops -->
-            <a href="/services/webinars-workshops" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
+            <a href="/services/digital-transformation" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                 <i class="fas fa-chalkboard-teacher text-yellow-500 dark:text-yellow-300 text-4xl mb-4"></i>
-                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-yellow-500 dark:group-hover:text-yellow-300">Webinars & Workshops</h3>
+                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-yellow-500 dark:group-hover:text-yellow-300">Digital Transformation</h3>
                 <p class="text-gray-600 dark:text-gray-400">Participate in interactive sessions with industry experts.</p>
             </a>
 
             <!-- Certification Study Packs -->
             <a href="/fastcert/resources" class="group bg-white dark:bg-gray-800 rounded-lg shadow p-6 text-center hover:shadow-lg transform hover:-translate-y-1 transition duration-300">
                 <i class="fas fa-book text-pink-500 dark:text-pink-300 text-4xl mb-4"></i>
-                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-pink-500 dark:group-hover:text-pink-300">Certification Study Packs</h3>
+                <h3 class="text-lg font-bold text-gray-700 dark:text-gray-300 group-hover:text-pink-500 dark:group-hover:text-pink-300">FastCert Library</h3>
                 <p class="text-gray-600 dark:text-gray-400">Get resources to excel in your certification exams.</p>
             </a>
         </div>
@@ -110,9 +110,10 @@
 <section class="bg-blue-600 dark:bg-blue-900 py-12">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <h2 class="text-3xl font-extrabold text-white">Take the Leap with CloudZone</h2>
-    <p class="mt-4 text-lg text-gray-200">Transform your business and career with our expert consulting and tailored solutions.</p>
+    <p class="mt-4 text-lg text-gray-200">Join thousands of professionals who trust CloudZone for their career and business growth.
+      Transform your business and career with our expert consulting and tailored solutions.</p>
     <div class="mt-6 flex justify-center space-x-4">
-      <a href="/get-started" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">Get Started</a>
+      <a href="/services" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">Get Started</a>
       <a href="/contact" class="bg-blue-800 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Contact Us</a>
     </div>
   </div>
@@ -203,6 +204,58 @@
     </div>
   </div>
 </section>
+
+<!-- resources/views/components/faq-section.blade.php -->
+
+<div class="bg-gray-100 dark:bg-gray-800 py-12">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">Frequently Asked Questions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Question 1 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">What industries do you cater to?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    We provide tailored IT solutions for a wide range of industries including healthcare, oil and gas, retail, financial services, and more.
+                </p>
+            </div>
+            <!-- Question 2 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">How do I request a consultation or service?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    You can request a consultation by using the "Request a Quote" or "Contact Us" buttons available on each service page.
+                </p>
+            </div>
+            <!-- Question 3 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Do you offer customized solutions?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Yes, all our services are customizable to meet the unique requirements of your business and industry.
+                </p>
+            </div>
+            <!-- Question 4 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">What training programs do you provide?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    We offer training in cloud platforms, cybersecurity, project management, and other high-demand areas. Custom training is also available.
+                </p>
+            </div>
+            <!-- Question 5 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Do you assist with regulatory compliance?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    Absolutely. Our GRC services help ensure compliance with local and international regulations such as GDPR, ISO 27001, and NESA.
+                </p>
+            </div>
+            <!-- Question 6 -->
+            <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">How can I get IT support in case of emergencies?</h3>
+                <p class="text-gray-700 dark:text-gray-300">
+                    We offer ad-hoc IT support services to address emergencies. Reach out through our support hotline or request assistance online.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 @endsection

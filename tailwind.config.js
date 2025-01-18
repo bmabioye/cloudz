@@ -12,7 +12,17 @@ export default {
         "./node_modules/aos/dist/aos.css",
         "./node_modules/@fortawesome/fontawesome-free/**/*.css",
     ],
-
+    safelist: [
+        'fixed',
+        'inset-0',
+        'flex',
+        'items-center',
+        'justify-center',
+        'bg-black',
+        'bg-opacity-50',
+        'hidden',
+        'z-50',
+      ],
     theme: {
         extend: {
             fontFamily: {

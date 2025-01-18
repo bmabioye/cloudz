@@ -27,6 +27,7 @@
                 <li><a href="/services" class="hover:text-blue-500">Our Services</a></li>
                 <li><a href="/careers" class="hover:text-blue-500">Careers</a></li>
                 <li><a href="/contact" class="hover:text-blue-500">Contact Us</a></li>
+                <li><a href="/terms" class="hover:text-blue-500">Terms</a></li>
             </ul>
         </div>
 
